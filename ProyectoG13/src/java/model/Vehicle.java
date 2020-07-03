@@ -2,7 +2,7 @@ package model;
 
 /**
  *
- * @author Mario Carranza Mena
+ * @author Mario Carranza Mena B51573
  */
 public class Vehicle {
     
@@ -17,7 +17,10 @@ public class Vehicle {
     private String bodyAndChassis; //Example: Sedan, 4x4, SUV, Hatchback, etc
     private int yearModel;
 
-    public Vehicle(String brand, String color, String modelName, int yearModel, String power, String range, String topSpeed, String aceleration, int numberOfDoors, String bodyAndChassis) {
+    public Vehicle(String brand, String color, String modelName, int yearModel, 
+            String power, String range, String topSpeed, String aceleration, 
+            int numberOfDoors, String bodyAndChassis) {
+
         this.brand = brand;
         this.color = color;
         this.modelName = modelName;
