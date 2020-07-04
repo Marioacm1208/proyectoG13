@@ -12,13 +12,14 @@ public class VehicleDAO implements IVehicle{
     
     ArrayList<Vehicle> vehicles;
     
+    
     public VehicleDAO() {
-        
+        vehicles = JsonVehicleManager.getInstance().getList();
     }
     
     @Override
     public ArrayList<Vehicle> list() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return vehicles;
     }
 
     @Override

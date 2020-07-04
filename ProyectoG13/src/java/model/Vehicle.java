@@ -16,10 +16,11 @@ public class Vehicle {
     private int numberOfDoors;
     private String bodyAndChassis; //Example: Sedan, 4x4, SUV, Hatchback, etc
     private int yearModel;
+    private double price; // In dollars
 
     public Vehicle(String brand, String color, String modelName, int yearModel, 
             String power, String range, String topSpeed, String aceleration, 
-            int numberOfDoors, String bodyAndChassis) {
+            int numberOfDoors, String bodyAndChassis, double price) {
 
         this.brand = brand;
         this.color = color;
@@ -31,6 +32,7 @@ public class Vehicle {
         this.numberOfDoors = numberOfDoors;
         this.bodyAndChassis = bodyAndChassis;
         this.yearModel = yearModel;
+        this.price = price;
     }
 
     public String getBrand() {
@@ -112,6 +114,16 @@ public class Vehicle {
     public void setYearModel(int yearModel) {
         this.yearModel = yearModel;
     }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
+    }
+    
+    
     
     @Override
     public String toString() {
@@ -119,6 +131,6 @@ public class Vehicle {
                 + yearModel + ", modelName=" + modelName + ", power=" + power 
                 + ", range=" + range + ", topSpeed=" + topSpeed + ", aceleration=" 
                 + aceleration + ", numberOfDoors=" + numberOfDoors + ", bodyAndChassis=" 
-                + bodyAndChassis + '}';
+                + bodyAndChassis + ", Price: $" + price + '}';
     }
 }
