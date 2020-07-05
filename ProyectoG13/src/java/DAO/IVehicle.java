@@ -5,7 +5,7 @@ import model.Vehicle;
 
 /**
  *
- * @author Mario
+ * @author Mario Carranza Mena B51573
  */
 public interface IVehicle {
     
