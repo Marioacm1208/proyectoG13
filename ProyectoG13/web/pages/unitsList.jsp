@@ -21,7 +21,7 @@
         <div class="container">
             <h1>Vehiculos Disponibles!</h1>
             <br>
-            <table class="table table-hover">
+            <table class="table-bordered">
                 <thead>
                     <tr>
                         <th scope="col">Marca</th>
@@ -29,13 +29,14 @@
                         <th scope="col">Precio</th>
                     </tr>
                 </thead>
-                <%
+                <%                    
                     VehicleDAO dao = new VehicleDAO();
                     ArrayList<Vehicle> list = dao.list();
                     Iterator it = list.iterator();
                     Vehicle car = null;
                     while (it.hasNext()) {
                         car = (Vehicle)it.next();
+                        System.out.println("CONSOLE: " + car.getModelName());
                 %>
                 <tbody>
                     <tr class="table-bordered">

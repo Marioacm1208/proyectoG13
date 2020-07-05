@@ -4,6 +4,7 @@ import com.google.gson.Gson;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,17 +18,12 @@ public class JsonVehicleManager {
     
     private static JsonVehicleManager instance;
     private ArrayList<Vehicle> list;
-    private final String FILE_PATH = "src/jsontest/vehicles.json";
+    private String filePath;
     private BufferedReader reader;
     private BufferedWriter writer;
     
     private JsonVehicleManager() {
-        try {
-            list = new ArrayList<Vehicle>();
-            this.reader = new BufferedReader(new FileReader(FILE_PATH));
-        } catch (FileNotFoundException ex) {
-            System.err.println(ex.getMessage());
-        }
+        list = new ArrayList<Vehicle>();
     }
     
     public static JsonVehicleManager getInstance() {
@@ -41,52 +37,53 @@ public class JsonVehicleManager {
      * Reads and transform data from Json File to useful Vehicle objects
      */
     public void readJson() {
-        Gson gson = new Gson();
-        String data = "";
         try {
-            while (true) {
-                String line = reader.readLine();
-                if (line != null) {
-                    data+= line;
-                } else {
-                    break;
+            this.reader = new BufferedReader(new FileReader(new File(filePath)));
+            Gson gson = new Gson();
+            String data = "";
+            try {
+                while (true) {
+                    String line = reader.readLine();
+                    if (line != null) {
+                        data+= line;
+                    } else {
+                        break;
+                    }
                 }
-            } 
-        } catch (IOException ex) {
-            System.err.println(ex.getMessage());
-        }
-        String[] jSons = data.split("}");
-        for (String jSon : jSons) { //Formating Json input data readed from file
-            if (jSon.length() > 5) {
-                if ((jSon + "}").contains("[")) {
-                    jSon = jSon.substring(jSon.indexOf("[") + 1, jSon.length()) + "}";
-                    list.add(gson.fromJson(jSon, Vehicle.class));
-                } else if ((jSon).contains("]")) {
-                    jSon = jSon.substring(0, jSon.indexOf("]") - 1) + "}";
-                    list.add(gson.fromJson(jSon, Vehicle.class));
-                } else if (jSon.charAt(0) == ',') {
-                    jSon = jSon.replaceFirst(",", " ");
-                    jSon = jSon.trim() + "}";
-                    list.add(gson.fromJson(jSon, Vehicle.class));
+            } catch (IOException ex) {
+                System.err.println(ex.getMessage());
+            }
+            String[] jSons = data.split("}");
+            for (String jSon : jSons) { //Formating Json input data readed from file
+                if (jSon.length() > 5) {
+                    if ((jSon + "}").contains("[")) {
+                        jSon = jSon.substring(jSon.indexOf("[") + 1, jSon.length()) + "}";
+                        list.add(gson.fromJson(jSon, Vehicle.class));
+                    } else if ((jSon).contains("]")) {
+                        jSon = jSon.substring(0, jSon.indexOf("]") - 1) + "}";
+                        list.add(gson.fromJson(jSon, Vehicle.class));
+                    } else if (jSon.charAt(0) == ',') {
+                        jSon = jSon.replaceFirst(",", " ");
+                        jSon = jSon.trim() + "}";
+                        list.add(gson.fromJson(jSon, Vehicle.class));
+                    }
                 }
             }
+        } catch (FileNotFoundException ex) {
+            System.err.println("ReadJson Method Error" + ex.getMessage());
+            ex.printStackTrace();
         }
     }
-    public static String charRemoveAt(String str, int p) {  
-        return str.substring(0, p) + str.substring(p + 1);  
-    }  
     
     /**
      * Updates Vehicle Json File with the curent list including last changes
      */
     public void saveVehiclesList() {
         try {
-            this.writer = new BufferedWriter(new FileWriter(FILE_PATH));
+            this.writer = new BufferedWriter(new FileWriter(new File(filePath)));
             Gson gson = new Gson();
             String data;
-            //for (Vehicle car : list) {
-                data = gson.toJson(list);
-            //}
+            data = gson.toJson(list);
             writer.write(data); // Then the whole file is updated including new changes
              
         } catch (IOException ex) {
@@ -120,6 +117,18 @@ public class JsonVehicleManager {
     }
     
     public ArrayList<Vehicle> getList() {
+        if (list.isEmpty()) {
+            JsonVehicleManager.getInstance().readJson();
+        }
         return list;
+    }
+    
+    public void setPath(String path) {
+        this.filePath = path;
+        System.out.println("PATH TO JSON: " + path);
+    }
+    
+    public String getPath() {
+        return filePath;
     }
 }

@@ -5,6 +5,8 @@
  */
 package controller;
 
+import DAO.json.JsonVehicleManager;
+import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -64,6 +66,10 @@ public class Controller extends HttpServlet {
         String action = request.getParameter("action");
         String access = "";
         if (action.equalsIgnoreCase("doLogin")) {
+            
+            String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
+            System.out.println("Archivo " + route + " existe?: " + new File(route).exists());
+            JsonVehicleManager.getInstance().setPath(route);
             access = showUnits;
         }
         RequestDispatcher view = request.getRequestDispatcher(access);

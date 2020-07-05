@@ -15,6 +15,8 @@ public class VehicleDAO implements IVehicle{
     
     public VehicleDAO() {
         vehicles = JsonVehicleManager.getInstance().getList();
+        System.out.println("Existencias" + vehicles.size());
+        System.out.println("Vehicles path (Printed from VehicleDAO) " + JsonVehicleManager.getInstance().getPath());
     }
     
     @Override
