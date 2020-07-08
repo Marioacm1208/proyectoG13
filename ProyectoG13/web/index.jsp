@@ -9,12 +9,18 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>IE Electric Movility</title>
     </head>
     <body>
-        <h1>Start Page Here!</h1>
+        <header>
+            <%@include file="pages/navbar.jsp"%>
+        </header>
+        <h1>Contenido Pagina Principal!</h1>
         <div class ="container">
-            <a class="btn btn-outline-success" href="Controller?action=doLogin">Iniciar Sesion</a>
+            <h2>Un sitio con estilo...</h2>
         </div>
+        <script src="js/jquery-3.5.1.min.js" type="text/javascript"></script>
+        <script src="js/bootstrap.min.js" type="text/javascript"></script>
     </body>
 </html>

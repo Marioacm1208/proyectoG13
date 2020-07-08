@@ -6,7 +6,6 @@
 package controller;
 
 import DAO.json.JsonVehicleManager;
-import java.io.File;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -24,6 +23,8 @@ import javax.servlet.http.HttpServletResponse;
 public class Controller extends HttpServlet {
     
     String showUnits = "pages/unitsList.jsp";
+    String search = "pages/search.jsp";
+    String home = "index.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,17 +66,35 @@ public class Controller extends HttpServlet {
             throws ServletException, IOException {
         String action = request.getParameter("action");
         String access = "";
-        if (action.equalsIgnoreCase("doLogin")) {
-            
-            String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
-            System.out.println("Archivo " + route + " existe?: " + new File(route).exists());
-            JsonVehicleManager.getInstance().setPath(route);
-            access = showUnits;
+        if (action == null) {
+            access = search;
+            String test = request.getParameter("userSearch");
+            System.out.println(test);
+        } else {
+            switch(action.toLowerCase()) {
+
+                case "list":
+                    String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
+                    //System.out.println("Archivo " + route + " existe?: " + new File(route).exists());
+                    JsonVehicleManager.getInstance().setPath(route);
+                    access = showUnits;
+                break;
+
+                case "search":
+                    access = search;
+                break;
+                
+                case "doLogin":
+                    System.out.println("NOT IMPLEMENTED!");
+                    access = home;
+                default:
+                    access = home;
+            }
         }
         RequestDispatcher view = request.getRequestDispatcher(access);
         view.forward(request, response);
     }
-
+     
     /**
      * Handles the HTTP <code>POST</code> method.
      *
