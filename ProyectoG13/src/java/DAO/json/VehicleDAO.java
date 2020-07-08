@@ -15,8 +15,6 @@ public class VehicleDAO implements IVehicle{
     
     public VehicleDAO() {
         vehicles = JsonVehicleManager.getInstance().getList();
-        System.out.println("Existencias" + vehicles.size());
-        System.out.println("Vehicles path (Printed from VehicleDAO) " + JsonVehicleManager.getInstance().getPath());
     }
     
     @Override
@@ -25,8 +23,8 @@ public class VehicleDAO implements IVehicle{
     }
 
     @Override
-    public boolean create() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public boolean create(Vehicle vehicle) {
+        return JsonVehicleManager.getInstance().addVehicle(vehicle);
     }
 
     @Override
@@ -35,18 +33,17 @@ public class VehicleDAO implements IVehicle{
     }
 
     @Override
-    public boolean update() {
+    public boolean update(Vehicle vehicle) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public boolean delete() {
+    public boolean delete(Vehicle vehicle) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override
-    public Vehicle search(String modelName) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Vehicle search(String value) {
+        return JsonVehicleManager.getInstance().findCar(value);
     }
-    
 }

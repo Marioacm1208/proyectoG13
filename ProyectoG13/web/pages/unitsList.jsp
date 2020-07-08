@@ -14,21 +14,25 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-        <link href="../styles/bootstrap.css" rel="stylesheet" type="text/css"/>
+        <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <title>JSP Page</title>
     </head>
     <body>
+        <header>
+            <%@include file="navbar.jsp"%>
+        </header>
         <div class="container">
             <h1>Vehiculos Disponibles!</h1>
             <br>
-            <table class="table-bordered">
+            <table class="table table-hover">
                 <thead>
-                    <tr>
-                        <th scope="col">Marca</th>
-                        <th scope="col">Modelo</th>
-                        <th scope="col">Precio</th>
+                    <tr class="table-primary">
+                        <th>Marca</th>
+                        <th>Modelo</th>
+                        <th>Precio</th>
                     </tr>
                 </thead>
+                <tbody>
                 <%                    
                     VehicleDAO dao = new VehicleDAO();
                     ArrayList<Vehicle> list = dao.list();
@@ -36,15 +40,13 @@
                     Vehicle car = null;
                     while (it.hasNext()) {
                         car = (Vehicle)it.next();
-                        System.out.println("CONSOLE: " + car.getModelName());
                 %>
-                <tbody>
-                    <tr class="table-bordered">
-                        <td class="text-center"><%=car.getBrand()%></td>
-                        <td class="text-center"><%=car.getModelName()%></td>
-                        <td class="text-center"><%=car.getPrice()%></td>
-                    </tr>
-                    <%}%>
+                        <tr class="table-info">
+                            <td><%=car.getBrand()%></td>
+                            <td><%=car.getModelName()%></td>
+                            <td><%=car.getPrice()%></td>
+                        </tr>
+                  <%}%>
                 </tbody>
             </table>
         </div>

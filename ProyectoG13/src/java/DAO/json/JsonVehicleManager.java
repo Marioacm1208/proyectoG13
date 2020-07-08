@@ -9,6 +9,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.util.Iterator;
 import model.Vehicle;
 /**
  * This class is about to manage the read, write and update of the Vehicles Json File
@@ -23,7 +24,7 @@ public class JsonVehicleManager {
     private BufferedWriter writer;
     
     private JsonVehicleManager() {
-        list = new ArrayList<Vehicle>();
+        list = new ArrayList<>();
     }
     
     public static JsonVehicleManager getInstance() {
@@ -53,6 +54,7 @@ public class JsonVehicleManager {
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
+            
             String[] jSons = data.split("}");
             for (String jSon : jSons) { //Formating Json input data readed from file
                 if (jSon.length() > 5) {
@@ -68,10 +70,9 @@ public class JsonVehicleManager {
                         list.add(gson.fromJson(jSon, Vehicle.class));
                     }
                 }
-            }
+            } // Cycle end
         } catch (FileNotFoundException ex) {
             System.err.println("ReadJson Method Error" + ex.getMessage());
-            ex.printStackTrace();
         }
     }
     
@@ -93,20 +94,55 @@ public class JsonVehicleManager {
                 writer.flush();
                 writer.close();
             } catch (IOException ex) {
-                System.err.println("WriteJsonError " + ex.getMessage());
+                System.err.println("Error Saving Vehicles List " + ex.getMessage());
             }
         }
     }
     
     /**
      * New vehicle is added to current memory list as first step
-     * @param vehicle New vechicle being added to the list
+     * @param vehicle New being added to the list
+     * @return True if vehicle is added correctly or false if vehicle is already in the list
      */
-    public void addVehicle(Vehicle vehicle) {
-        list.add(vehicle);
+    public boolean addVehicle(Vehicle vehicle) {
+        Iterator it = list.iterator();
+        boolean result = false;
+        while (it.hasNext()) {
+            Vehicle current = (Vehicle)it.next();
+            if (!vehicle.getModelName().equalsIgnoreCase(current.getModelName())) {
+                result = list.add(vehicle);
+            }
+        }
+        if (result) {
+            saveVehiclesList();
+        }
+        return result;
     }
     
-    
+    public Vehicle findCar(String searchArg) {
+        
+        Vehicle vehicle = null;
+        readJson();
+        Iterator it = list.iterator();
+        while (it.hasNext()) {
+            Vehicle current = (Vehicle)it.next();
+            if (current.getBrand().equalsIgnoreCase(searchArg)) {
+                vehicle = current;
+                break;
+            } else if (current.getBrand().equalsIgnoreCase(searchArg)) {
+                vehicle = current;
+                break;
+            } else if(current.getBodyAndChassis().equalsIgnoreCase(searchArg)) {
+                vehicle = current;
+                 break;
+            }
+        }
+        
+        return vehicle;
+    }
+
+    // ---------- Ignore this section (Just testing some stuff) ---------
+
     /**
      * A simple Method that prints out all vehicles from current list
      */
@@ -116,6 +152,9 @@ public class JsonVehicleManager {
         });
     }
     
+    /**
+     * Do i really need to comment this man :v
+     **/
     public ArrayList<Vehicle> getList() {
         if (list.isEmpty()) {
             JsonVehicleManager.getInstance().readJson();
@@ -125,7 +164,7 @@ public class JsonVehicleManager {
     
     public void setPath(String path) {
         this.filePath = path;
-        System.out.println("PATH TO JSON: " + path);
+        //System.out.println("PATH TO JSON: " + path);
     }
     
     public String getPath() {
