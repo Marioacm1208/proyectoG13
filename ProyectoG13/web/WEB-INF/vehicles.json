@@ -1,0 +1,49 @@
+[{
+        "brand": "Tesla",
+        "color": "Rojo",
+        "modelName": "Roadster",
+        "power": "288Hp",
+        "range": "997Km",
+        "topSpeed": "402.3Kmh",
+        "aceleration": "1.9S",
+        "numberOfDoors": 2,
+        "bodyAndChassis": "AWD-Sports Car",
+        "yearModel": 2020,
+        "price": 250000.0
+    }, {
+        "brand": "Porsche",
+        "color": "Blanco",
+        "modelName": "Taycan Turbo S",
+        "power": "562Hp",
+        "range": "412Km*",
+        "topSpeed": "250KmH",
+        "aceleration": "2.8S",
+        "numberOfDoors": 2,
+        "bodyAndChassis": "Sports Car",
+        "yearModel": 2020,
+        "price": 105150.0
+    }, {
+        "brand": "Audi",
+        "color": "Space Gray",
+        "modelName": "E-tron",
+        "power": "562Hp",
+        "range": "412Km*",
+        "topSpeed": "250KmH",
+        "aceleration": "2.8S",
+        "numberOfDoors": 2,
+        "bodyAndChassis": "Sports Car",
+        "yearModel": 2020,
+        "price": 75795.0
+    }, {
+        "brand": "Jaguar",
+        "color": "Blue",
+        "modelName": "I-Pace",
+        "power": "395Hp",
+        "range": "375Km*",
+        "topSpeed": "200KmH",
+        "aceleration": "4.8S",
+        "numberOfDoors": 4,
+        "bodyAndChassis": "SUV",
+        "yearModel": 2020,
+        "price": 84377.0
+    }]
