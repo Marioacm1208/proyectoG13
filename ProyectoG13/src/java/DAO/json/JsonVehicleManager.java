@@ -129,7 +129,7 @@ public class JsonVehicleManager {
             if (current.getBrand().equalsIgnoreCase(searchArg)) {
                 vehicle = current;
                 break;
-            } else if (current.getBrand().equalsIgnoreCase(searchArg)) {
+            } else if (current.getModelName().equalsIgnoreCase(searchArg)) {
                 vehicle = current;
                 break;
             } else if(current.getBodyAndChassis().equalsIgnoreCase(searchArg)) {

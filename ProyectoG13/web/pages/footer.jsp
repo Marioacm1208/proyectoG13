@@ -10,8 +10,8 @@
                 <div  class="col-md-3 col-sm-6 col-xs-12 segment-one">
                     <h3>Group 13 Project</h3>
                     <p>Mario Carranza Mena B51573</p>
-                    <p>Luis</p>
-                    <p>Melany</p>
+                    <p>Melany Charpentier Vargas B61886</p>
+                    <p>Luis Vega Otárola B98386</p>
                 </div>
                 <div class="col-md-3 col-sm-6 col-xs-12 segment-two">
                     <h2>Implemented</h2>

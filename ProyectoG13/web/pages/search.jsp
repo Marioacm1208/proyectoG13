@@ -20,7 +20,7 @@
             <h1>Take a look to your next car!</h1>
         </div>
         <div class ="container">
-            <form class="form-inline my-2 my-lg-0" id="searchForm" method="post" action="Controller?action=search&">
+            <form class="form-inline my-2 my-lg-0" id="searchForm" method="post" action="Controller?action=search">
                 <img src="../img/search.png" alt="Search"/>
                 <input type="text" name="searchInput" placeholder="Marca, Nombre Modelo Tipo"/>
                 <input type="submit" name="signIn" value="Buscar">
