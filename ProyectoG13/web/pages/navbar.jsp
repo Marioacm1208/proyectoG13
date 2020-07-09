@@ -7,21 +7,24 @@
     <div class="collapse navbar-collapse" id="navbarColor01">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item active">
-                <a class="nav-link" href="Controller?action=home">Inicio<span class="sr-only">(current)</span></a>
+                <a class="nav-link" href="Controller?action=home">Start<span class="sr-only">(current)</span></a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Controller?action=list">Lista Completa</a>
+                <a class="nav-link" href="Controller?action=list">Shop</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Controller?action=home">Pricing</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Sobre Nosotros</a>
+                <a class="nav-link" href="#">About Us</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Login</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="Controller">
-            <input class="form-control mr-sm-2" type="text" name="userSearch" placeholder="Busqueda">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit" >Buscar</button>
+            <input class="form-control mr-sm-2" type="text" name="userSearch" placeholder="Type here">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit" >Search</button>
         </form>
     </div>
 </nav>
