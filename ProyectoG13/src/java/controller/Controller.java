@@ -21,9 +21,10 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Controller", urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
     
+    String home = "index.jsp";
+    String login = "pages/login.jsp";
     String showUnits = "pages/unitsList.jsp";
     String search = "pages/search.jsp";
-    String home = "index.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -65,9 +66,7 @@ public class Controller extends HttpServlet {
         String action = request.getParameter("action");
         String access = "";
         if (action == null) {
-            access = search;
-            String test = request.getParameter("userSearch");
-            System.out.println(test);
+            access = home;
         } else {
             switch(action.toLowerCase()) {
 
@@ -79,12 +78,12 @@ public class Controller extends HttpServlet {
                 break;
 
                 case "search":
-                    access = "search.jsp";
+                    access = search;
                 break;
                 
-                case "doLogin":
-                    System.out.println("NOT IMPLEMENTED!");
-                    access = home;
+                case "login":
+                    access = login;
+                    break;
                 default:
                     access = home;
             }

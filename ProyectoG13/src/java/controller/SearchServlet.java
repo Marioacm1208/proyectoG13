@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAO.json.JsonVehicleManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -16,7 +17,7 @@ import javax.servlet.http.HttpServletResponse;
 
 /**
  *
- * @author Mario
+ * @author Mario Carranza Mena B51573
  */
 @WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
 public class SearchServlet extends HttpServlet {
@@ -63,22 +64,24 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("searchParams");
-        String redirectTo = "";
-        if (action != null) {
-            System.out.println("FUE NULL? " + (action));
-            switch(action) {
+        String params = request.getParameter("searchParams");
+        request.setAttribute("searchParams", params);
+        String redirectTo = home;
+        if (params != null) {
+            String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
+            JsonVehicleManager.getInstance().setPath(route);
+            switch(params) {
                 case "advanced":
                     redirectTo = advanced;
                     break;
                 default:
                     redirectTo = results;
+                    //System.out.println("Redirected to " + results + " with: " + params);
+                    request.getSession().setAttribute("searchParams", params);
             }
-        } else {
-            redirectTo = home;
         }
-            RequestDispatcher dispatcher = request.getRequestDispatcher(redirectTo);
-            dispatcher.forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(redirectTo);
+        dispatcher.forward(request, response);
     }
      
     /**

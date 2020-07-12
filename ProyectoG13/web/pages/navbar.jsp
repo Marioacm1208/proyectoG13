@@ -22,7 +22,7 @@
                 <a class="nav-link" href="search?searchParams=advanced">Advanced Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="login">Login</a>
+                <a class="nav-link" href="Controller?action=login">Login</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="search" method="get">

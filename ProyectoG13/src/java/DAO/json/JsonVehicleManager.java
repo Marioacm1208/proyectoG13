@@ -110,8 +110,10 @@ public class JsonVehicleManager {
         while (it.hasNext()) {
             Vehicle current = (Vehicle)it.next();
             if (!vehicle.getModelName().equalsIgnoreCase(current.getModelName())) {
-                result = list.add(vehicle);
-            }
+                if (!it.hasNext()) {
+                    result = list.add(vehicle);
+                }
+            }      
         }
         if (result) {
             saveVehiclesList();
@@ -119,26 +121,26 @@ public class JsonVehicleManager {
         return result;
     }
     
-    public Vehicle findCar(String searchArg) {
+    public ArrayList<Vehicle> findCar(String searchArg) {
         
-        Vehicle vehicle = null;
-        readJson();
-        Iterator it = list.iterator();
-        while (it.hasNext()) {
-            Vehicle current = (Vehicle)it.next();
-            if (current.getBrand().equalsIgnoreCase(searchArg)) {
-                vehicle = current;
-                break;
-            } else if (current.getModelName().equalsIgnoreCase(searchArg)) {
-                vehicle = current;
-                break;
-            } else if(current.getBodyAndChassis().equalsIgnoreCase(searchArg)) {
-                vehicle = current;
-                 break;
-            }
+        ArrayList<Vehicle> results = new ArrayList<>();
+        if (list.isEmpty()) {
+            readJson();
         }
         
-        return vehicle;
+        Iterator it = list.iterator();
+        searchArg = searchArg.toLowerCase().trim();
+        while(it.hasNext()) {
+            Vehicle current = (Vehicle)it.next();
+            if (current.getBrand().equalsIgnoreCase(searchArg)) {
+                results.add(current);
+            } else if (current.getModelName().equalsIgnoreCase(searchArg)) {
+                results.add(current);
+            } else if(current.getBodyAndChassis().equalsIgnoreCase(searchArg)) {
+                results.add(current);
+            }
+        }
+        return results;
     }
 
     // ---------- Ignore this section (Just testing some stuff) ---------
@@ -164,7 +166,7 @@ public class JsonVehicleManager {
     
     public void setPath(String path) {
         this.filePath = path;
-        //System.out.println("PATH TO JSON: " + path);
+        System.out.println("SET PATH TO JSON: " + path);
     }
     
     public String getPath() {

@@ -1,0 +1,82 @@
+/* 
+    Created on : 12/07/2020, 12:00:20 AM
+    Author     : Mario
+*/
+
+body {
+    font-family: "Lato", sans-serif;
+}
+
+.main-container{
+    height: 100%;
+}
+
+
+.main-head{
+    height: 150px;
+    background: #FFF;
+   
+}
+
+.side-text {
+    background-color: #000;
+    overflow-x: hidden;
+    padding-top: 20px;
+}
+
+
+.main-form-container {
+    padding: 0px 10px;
+}
+
+@media screen and (max-height: 450px) {
+    .side-text {padding-top: 15px;}
+}
+
+@media screen and (max-width: 450px) {
+    .login-form{
+        margin-top: 10%;
+    }
+
+    .register-form{
+        margin-top: 10%;
+    }
+}
+
+@media screen and (min-width: 768px){
+    .main-form-container{
+        margin-left: 40%;
+    }
+
+    .side-text{
+        width: 40%;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+    }
+
+    .login-form{
+        margin-top: 80%;
+    }
+
+    .register-form{
+        margin-top: 20%;
+    }
+}
+
+
+.main-text{
+    margin-top: 20%;
+    padding: 60px;
+    color: #fff;
+}
+
+.main-text h2{
+    font-weight: 300;
+}
+
+.btn-black{
+    background-color: #000 !important;
+    color: #fff;
+}

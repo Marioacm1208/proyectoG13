@@ -2,17 +2,24 @@
     Created on : 09/07/2020, 02:33:50 AM
     Author     : Mario
 */
+html, body {
+    height: 100%;
+}
 
-p {
+body{
+    overflow-x: hidden; 
+}
+
+footer p {
     color: #999;
     line-height: 25px;
 }
 
-h2, h3 {
+footer h2, h3 {
     color: #fff;
 }
 
-h2{
+footer h2{
     font-size: 18px;
 }
 
@@ -22,7 +29,7 @@ h2{
 }
 
 .segment-one h3{
-    font-family: Courgette;
+    font-family: Courgette, cursive;
     color: #fff;
     letter-spacing: 3px;
     margin: 10px 0;
@@ -30,7 +37,7 @@ h2{
 
 .segment-two h2{
     color: #fff;
-    font-family: Poppins;
+    font-family: Poppins, sans-serif;
     text-transform: uppercase;
 }
 
@@ -94,10 +101,16 @@ h2{
     padding-right: 10px;
 }
 
-.segment-four form input [type=submit]{
+.segment-four form input[type=email]{
+    margin-left: -5px;
+    margin-bottom: 5px;
+    width: 100%;
+}
+
+.segment-four form input[type=submit]{
     background: #ac2925;
     border: none;
-    padding: 3px 5px;
+    width: 100%;
     margin-left: -5px;
     color: #fff;
     text-transform: uppercase;

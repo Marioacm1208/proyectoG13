@@ -55,7 +55,7 @@
                             <li class="list-group-item">Doors: <%=car2.getNumberOfDoors()%></li>
                             <li class="list-group-item">CarBody: <%=car2.getBodyAndChassis()%></li>
                         </ul>
-                    </div>                
+                    </div>
                 <%}%>
         </div>
 
@@ -86,6 +86,6 @@
         </div>
         <script src="js/jquery-3.5.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <%@include file="footer.jsp"%>
     </body>
-    <%@include file="footer.jsp"%>
 </html>
