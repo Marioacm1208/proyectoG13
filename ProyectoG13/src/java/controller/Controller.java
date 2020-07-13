@@ -26,6 +26,7 @@ public class Controller extends HttpServlet {
     final String LOGIN = "pages/login.jsp";
     String showUnits = "pages/unitsList.jsp";
     String search = "pages/search.jsp";
+    final String SELLS_REP = "pages/sellsReports.jsp"; 
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,6 +84,10 @@ public class Controller extends HttpServlet {
                     //String usersFile = getServletContext().getRealPath("/WEB-INF/users.json");
                     //JsonVehicleManager.getInstance().setPath(usersFile);
                     redirectAddress = LOGIN;
+                    break;
+                    
+                case "reports":
+                    access = SELLS_REP;
                     break;
                 default:
                     redirectAddress = HOME;
