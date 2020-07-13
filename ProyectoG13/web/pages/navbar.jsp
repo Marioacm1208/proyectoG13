@@ -1,5 +1,5 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <a class="navbar-brand" href="Controller?action=home">IE Electric Movility</a>
+  <a class="navbar-brand" href="Controller?action=home">IE Electric Mobility</a>
   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
     <span class="navbar-toggler-icon"></span>
   </button>
@@ -19,10 +19,10 @@
                 <a class="nav-link" href="#">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="search?searchParams=advanced">Advanced Search</a>
+                <a class="nav-link" href="Controller?action=search">Advanced Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Controller?action=login">Login</a>
+                <a class="nav-link" href="Controller?action=goLogin">Login</a>
             </li>
         </ul>
         <form class="form-inline my-2 my-lg-0" action="search" method="get">

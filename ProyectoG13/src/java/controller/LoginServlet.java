@@ -7,6 +7,7 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -19,6 +20,8 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
+    
+    private final String PROFILE = "pages/profile.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -58,7 +61,29 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
+        String pass = request.getParameter("password");
+        String username = request.getParameter("username");
+        /**if (!(pass.isEmpty() || username.isEmpty())) {
+            System.out.println("User Data" + pass + "\n" + username);
+            String name = request.getParameter("email");
+            String password = request.getParameter("password");
+            UserModel userModel = new UserModel(getServletContext().getRealPath("/WEB-INF/userXMLDocument.xml"));
+            User user = userModel.getUser(name);  
+            if (user != null) {
+                if ((DigestUtils.md5Hex(password)).equals(user.getPassword())) {
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.setAttribute("loggedUser", user); //'session' implicit object. 
+                    request.getSession().setAttribute("loggedUser", user);  
+                } else {
+                    request.getRequestDispatcher("userLoginError.jsp").forward(request, response);
+                }
+            }
+        } else {
+            
+        }
+        **/
+        //RequestDispatcher requestDispatcher = request.getRequestDispatcher(acces);
+        //requestDispatcher.forward(request, response);
     }
 
     /**

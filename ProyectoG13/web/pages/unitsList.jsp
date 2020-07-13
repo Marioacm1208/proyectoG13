@@ -17,7 +17,7 @@
         <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="styles/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <title>JSP Page</title>
+        <title>Shop - IE Electric Mobility</title>
     </head>
     <%
         VehicleDAO dao = new VehicleDAO();

@@ -12,7 +12,7 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="styles/style.css" rel="stylesheet" type="text/css"/>
-        <title>IElectric Movility - Advanced Search</title>
+        <title>IElectric Mobility - Advanced Search</title>
     </head>
     <body>
         <header>

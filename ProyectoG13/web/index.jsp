@@ -13,7 +13,7 @@
         <link href="styles/style.css" rel="stylesheet" type="text/css"/>
         <link href="https://fonts.googleapis.com/css2?family=Courgette&family=Poppins&display=swap" rel="stylesheet">
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <title>IE Electric Movility</title>
+        <title>IE Electric Mobility</title>
     </head>
     <body>
         <header>
@@ -22,8 +22,8 @@
         <div class="h-100 position-relative d-flex justify-content-center align-items-center">
             <div style="z-index: 1;">
                 <h1 class="display-3">Go Electric!</h1>
-                <p class="lead" style="text-shadow: 1px 1px #000; color: #000">Sign Up now for free and get a 15% off in your first purchase</p>
-                <p style="text-shadow: 1px 1px #000; color: #000">Want to know more? Just hit the click button down below</p>
+                <p class="lead" style="text-shadow: 1px 1px #000; color: #fff">Sign Up now for free and get a 15% off in your first purchase</p>
+                <p style="text-shadow: 1px 1px #000; color: #fff; font-size: 1.2em">Want to know more? Just hit the click button down below</p>
                 <p class="lead">
                     <a class="btn btn-primary" href="Controller?action=login" role="button">SignUp</a>
                 </p>

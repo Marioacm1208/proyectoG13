@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "Controller", urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
     
-    String home = "index.jsp";
+    final String home = "index.jsp";
     String login = "pages/login.jsp";
     String showUnits = "pages/unitsList.jsp";
     String search = "pages/search.jsp";
@@ -81,15 +81,14 @@ public class Controller extends HttpServlet {
                     access = search;
                 break;
                 
-                case "login":
+                case "goLogin":
                     access = login;
                     break;
                 default:
                     access = home;
             }
         }
-        RequestDispatcher view = request.getRequestDispatcher(access);
-        view.forward(request, response);
+        request.getRequestDispatcher(access).forward(request, response);
     }
      
     /**
