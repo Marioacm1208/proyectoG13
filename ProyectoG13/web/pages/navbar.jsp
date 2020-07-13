@@ -19,15 +19,18 @@
                 <a class="nav-link" href="#">About Us</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Login</a>
+                <a class="nav-link" href="Controller?action=search">Advanced Search</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="Controller?action=goLogin">Login</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Controller?action=reports">Reports</a>
             </li>
         </ul>
-        <form class="form-inline my-2 my-lg-0" action="Controller">
-            <input class="form-control mr-sm-2" type="text" name="userSearch" placeholder="Type here">
-            <button class="btn btn-secondary my-2 my-sm-0" type="submit" >Search</button>
+        <form class="form-inline my-2 my-lg-0" action="search" method="get">
+            <input class="form-control mr-sm-2" type="text" name="searchParams" placeholder="Type here">
+            <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
         </form>
     </div>
 </nav>

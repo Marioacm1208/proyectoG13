@@ -34,7 +34,7 @@
                     <h2>Our Magazine</h2>
                     <p>Are you really fascinated about electrification of movility? Consider to subscribe to our monthly magazine!</p>
                     <form>
-                        <input type="email">
+                        <input type="email" placeholder="Email">
                         <input type="submit" value="Subscribe">
                     </form>
                 </div>

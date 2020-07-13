@@ -43,7 +43,7 @@ public class VehicleDAO implements IVehicle{
     }
 
     @Override
-    public Vehicle search(String value) {
+    public ArrayList<Vehicle> search(String value) {
         return JsonVehicleManager.getInstance().findCar(value);
     }
 }

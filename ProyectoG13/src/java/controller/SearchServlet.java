@@ -16,19 +16,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
+ *
  * @author Mario Carranza Mena B51573
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller"})
-public class Controller extends HttpServlet {
+@WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
+public class SearchServlet extends HttpServlet {
     
-    final String home = "index.jsp";
-    String login = "pages/login.jsp";
-    String showUnits = "pages/unitsList.jsp";
-    String search = "pages/search.jsp";
-
+    String results = "pages/searchResults.jsp";
+    String advanced = "pages/search.jsp";
+    String home = "index.jsp";
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -42,10 +43,10 @@ public class Controller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controller</title>");
+            out.println("<title>Servlet SearchServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controller at " + request.getContextPath() + "</h1>");
+            out.println("<h1>" + request.getParameter("userSearch") + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,32 +64,24 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String access = "";
-        if (action == null) {
-            access = home;
-        } else {
-            switch(action.toLowerCase()) {
-
-                case "list":
-                    String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
-                    //System.out.println("Archivo " + route + " existe?: " + new File(route).exists());
-                    JsonVehicleManager.getInstance().setPath(route);
-                    access = showUnits;
-                break;
-
-                case "search":
-                    access = search;
-                break;
-                
-                case "goLogin":
-                    access = login;
+        String params = request.getParameter("searchParams");
+        request.setAttribute("searchParams", params);
+        String redirectTo = home;
+        if (params != null) {
+            String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
+            JsonVehicleManager.getInstance().setPath(route);
+            switch(params) {
+                case "advanced":
+                    redirectTo = advanced;
                     break;
                 default:
-                    access = home;
+                    redirectTo = results;
+                    //System.out.println("Redirected to " + results + " with: " + params);
+                    request.getSession().setAttribute("searchParams", params);
             }
         }
-        request.getRequestDispatcher(access).forward(request, response);
+        RequestDispatcher dispatcher = request.getRequestDispatcher(redirectTo);
+        dispatcher.forward(request, response);
     }
      
     /**
@@ -102,6 +95,7 @@ public class Controller extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
         processRequest(request, response);
     }
 
@@ -114,4 +108,5 @@ public class Controller extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }

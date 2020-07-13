@@ -5,7 +5,6 @@
  */
 package controller;
 
-import DAO.json.JsonVehicleManager;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -16,19 +15,18 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * @author Mario Carranza Mena B51573
+ *
+ * @author Mario
  */
-@WebServlet(name = "Controller", urlPatterns = {"/Controller"})
-public class Controller extends HttpServlet {
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+public class LoginServlet extends HttpServlet {
     
-    final String home = "index.jsp";
-    String login = "pages/login.jsp";
-    String showUnits = "pages/unitsList.jsp";
-    String search = "pages/search.jsp";
+    private final String PROFILE = "pages/profile.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
+     *
      * @param request servlet request
      * @param response servlet response
      * @throws ServletException if a servlet-specific error occurs
@@ -42,10 +40,10 @@ public class Controller extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet Controller</title>");
+            out.println("<title>Servlet LoginServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>Servlet Controller at " + request.getContextPath() + "</h1>");
+            out.println("<h1>Servlet LoginServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -63,34 +61,31 @@ public class Controller extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        String action = request.getParameter("action");
-        String access = "";
-        if (action == null) {
-            access = home;
-        } else {
-            switch(action.toLowerCase()) {
-
-                case "list":
-                    String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
-                    //System.out.println("Archivo " + route + " existe?: " + new File(route).exists());
-                    JsonVehicleManager.getInstance().setPath(route);
-                    access = showUnits;
-                break;
-
-                case "search":
-                    access = search;
-                break;
-                
-                case "goLogin":
-                    access = login;
-                    break;
-                default:
-                    access = home;
+        String pass = request.getParameter("password");
+        String username = request.getParameter("username");
+        /**if (!(pass.isEmpty() || username.isEmpty())) {
+            System.out.println("User Data" + pass + "\n" + username);
+            String name = request.getParameter("email");
+            String password = request.getParameter("password");
+            UserModel userModel = new UserModel(getServletContext().getRealPath("/WEB-INF/userXMLDocument.xml"));
+            User user = userModel.getUser(name);  
+            if (user != null) {
+                if ((DigestUtils.md5Hex(password)).equals(user.getPassword())) {
+                    request.getRequestDispatcher("index.jsp").forward(request, response);
+                    request.setAttribute("loggedUser", user); //'session' implicit object. 
+                    request.getSession().setAttribute("loggedUser", user);  
+                } else {
+                    request.getRequestDispatcher("userLoginError.jsp").forward(request, response);
+                }
             }
+        } else {
+            
         }
-        request.getRequestDispatcher(access).forward(request, response);
+        **/
+        //RequestDispatcher requestDispatcher = request.getRequestDispatcher(acces);
+        //requestDispatcher.forward(request, response);
     }
-     
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -114,4 +109,5 @@ public class Controller extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
+
 }
