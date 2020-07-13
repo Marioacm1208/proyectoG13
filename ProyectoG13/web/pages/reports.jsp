@@ -3,11 +3,6 @@
     Created on : Jul 11, 2020, 7:08:47 PM
     Author     : Guillermo Vega
 --%>
-<%@page import="DAO.json.VehicleDAO"%>
-<%@page import="java.util.Iterator"%>
-<%@page import="java.util.ArrayList"%>
-<%@page import="model.Vehicle"%>
-<%@page import="DAO.json.JsonVehicleManager"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>

@@ -5,7 +5,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 /**
- *  This class manage all methods in matter of hashing with SHA256 algorithm
+ * This class manage all methods in matter of hashing with SHA256 algorithm
  * This class use Singleton design pattern because we need just a single instance 
  * to do the job of resume into a hash any String 
  * @author Mario Carranza Mena B51573
@@ -13,11 +13,11 @@ import java.security.NoSuchAlgorithmException;
 public class Hasher {
     
     private static Hasher instance;
+    
     private Hasher() {
-             
     }
     
-    public Hasher getInstance() {
+    public static Hasher getInstance() {
         if (instance == null) {
             instance = new Hasher();
         }   
@@ -27,10 +27,9 @@ public class Hasher {
       * @return String object with a SHA256 representation from requested String
       * @param hashRequest String to be processed throught Sha256 algorithm
       */
-    public String getHash(String hashRequest) {
-        
+    public String getHash(String hashRequest) {    
         try {
-            MessageDigest digest = MessageDigest.getInstance("SHA256");
+            MessageDigest digest = MessageDigest.getInstance("SHA-256");
             byte[] bytedHash = digest.digest(hashRequest.getBytes(StandardCharsets.UTF_8));
             StringBuffer hexadecimal = new StringBuffer();
             for (int i = 0; i < bytedHash.length; i++) {

@@ -3,6 +3,8 @@
     Created on : Jul 12, 2020, 7:08:29 PM
     Author     : Guillermo Vega
 --%>
+<%@page import="model.User"%>
+<%@page import="DAO.json.UserDAO"%>
 <%@page import="DAO.json.VehicleDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
@@ -33,7 +35,7 @@
             <div class="card mb-3">
                 <h3 class="card-header">USER PURCHASES</h3>
                 <div class="card-body">
-                    <p class="card-text"><%=user.getShoppingHistory%></p>
+                    <p class="card-text"><%=user.getShoppingHistory()%></p>
                 </div>    
             </div>        
         </div>

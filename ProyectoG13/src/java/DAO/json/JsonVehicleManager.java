@@ -86,7 +86,6 @@ public class JsonVehicleManager {
             String data;
             data = gson.toJson(list);
             writer.write(data); // Then the whole file is updated including new changes
-             
         } catch (IOException ex) {
             System.out.println("Error Writing to Vehicle Json File" + ex.getMessage());
         } finally {
@@ -127,7 +126,6 @@ public class JsonVehicleManager {
         if (list.isEmpty()) {
             readJson();
         }
-        
         Iterator it = list.iterator();
         searchArg = searchArg.toLowerCase().trim();
         while(it.hasNext()) {
@@ -166,7 +164,7 @@ public class JsonVehicleManager {
     
     public void setPath(String path) {
         this.filePath = path;
-        System.out.println("SET PATH TO JSON: " + path);
+        System.out.println("SETED PATH TO JSON: " + filePath);
     }
     
     public String getPath() {

@@ -1,7 +1,9 @@
-
 package DAO.json;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonIOException;
+import com.google.gson.JsonSyntaxException;
+import com.google.gson.reflect.TypeToken;
 import java.util.ArrayList;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -10,13 +12,16 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.Reader;
+import java.io.Writer;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.Iterator;
 import model.User;
-
-
 /**
  * This class is about to manage the read, write and update of the User Json File
  * @author Guillermo Vega
+ * @author Mario Carranza Mena
  */
 public class JsonUserManager {
     
@@ -77,27 +82,27 @@ public class JsonUserManager {
         } catch (FileNotFoundException ex) {
             System.err.println("ReadJson Method Error" + ex.getMessage());
         }
+        listUsers();
     }
     
     /**
      * Updates User Json File with the current list including last changes
      */
-    public void saveVehiclesList() {
+    public void saveUsersList() {
         try {
             this.writer = new BufferedWriter(new FileWriter(new File(filePath)));
             Gson gson = new Gson();
             String data;
             data = gson.toJson(list);
             writer.write(data); // Then the whole file is updated including new changes
-             
         } catch (IOException ex) {
-            System.out.println("Error Writing to Vehicle Json File" + ex.getMessage());
+            System.out.println("Error Writing to Users Json File" + ex.getMessage());
         } finally {
             try {
                 writer.flush();
                 writer.close();
             } catch (IOException ex) {
-                System.err.println("Error Saving Vehicles List " + ex.getMessage());
+                System.err.println("Error Saving Users List " + ex.getMessage());
             }
         }
     }
@@ -105,27 +110,44 @@ public class JsonUserManager {
     /**
      * A new User is added to current memory list as first step
      * @param user New being added to the list
+     * @param route
      * @return True if the user is added correctly or false if the user is already in the list
      */
     public boolean addUser(User user) {
-        Iterator it = list.iterator();
-        boolean result = false;
-        while (it.hasNext()) {
-            User current = (User)it.next();
-            if (!user.getName().equalsIgnoreCase(current.getName())) {
-                result = list.add(user);
+        boolean exists = false;
+        
+        try {
+            Gson gson = new Gson();
+            Reader reader = Files.newBufferedReader(Paths.get(filePath));
+            ArrayList<User> users = gson.fromJson(reader, new TypeToken<ArrayList<User>>() {}.getType());
+            reader.close();
+            
+            for (User u : users) {
+                if (u.geteMail().equalsIgnoreCase(user.geteMail())) {
+                    exists = true;
+                    break;
+                }
             }
+            
+            if (!exists) {
+                users.add(user);
+
+                Writer writer = new FileWriter(filePath);
+                new Gson().toJson(users, writer);
+                writer.close();
+            } else {
+                return false;
+            }
+        } catch(JsonIOException | JsonSyntaxException | IOException ex) {
+            System.err.println("Error Saving User: " + ex.getMessage());
+            return false;
         }
-        if (result) {
-            saveVehiclesList();
-        }
-        return result;
+        return true;
     }
     
     public User findUser(String searchArg) {
         
         User user = null;
-        readJson();
         Iterator it = list.iterator();
         while (it.hasNext()) {
             User current = (User)it.next();
@@ -137,10 +159,9 @@ public class JsonUserManager {
                 break;
             } else if(current.geteMail().equalsIgnoreCase(searchArg)) {
                 user = current;
-                 break;
+                break;
             }
         }
-        
         return user;
     }
 
@@ -150,13 +171,13 @@ public class JsonUserManager {
      * A simple Method that prints out all users from current list
      */
     public void listUsers() {
-        list.forEach(user -> {
+        for (User user : list) {
             System.out.println(user.toString());
-        });
+        }
     }
     
     /**
-     * Do i really need to comment this man :v
+     * Do i really need to comment this? :V
      **/
     public ArrayList<User> getList() {
         if (list.isEmpty()) {
@@ -167,9 +188,9 @@ public class JsonUserManager {
     
     public void setPath(String path) {
         this.filePath = path;
-        //System.out.println("PATH TO JSON: " + path);
+        System.out.println("SETTED PATH TO USERS JSON: " + filePath);
     }
-    
+     
     public String getPath() {
         return filePath;
     }

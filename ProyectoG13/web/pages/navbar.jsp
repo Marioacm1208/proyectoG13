@@ -22,7 +22,7 @@
                 <a class="nav-link" href="Controller?action=search">Advanced Search</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="Controller?action=goLogin">Login</a>
+                <a class="nav-link" href="Controller?action=login">Login</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="Controller?action=reports">Reports</a>
