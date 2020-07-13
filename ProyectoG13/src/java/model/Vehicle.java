@@ -17,10 +17,16 @@ public class Vehicle {
     private String bodyAndChassis; //Example: Sedan, 4x4, SUV, Hatchback, etc
     private int yearModel;
     private double price; // In dollars
+    private int soldUnits; 
+    private int availableUnits;
+    
+    public Vehicle(){
+    
+    }
 
     public Vehicle(String brand, String color, String modelName, int yearModel, 
             String power, String range, String topSpeed, String aceleration, 
-            int numberOfDoors, String bodyAndChassis, double price) {
+            int numberOfDoors, String bodyAndChassis, double price, int availableUnits) {
 
         this.brand = brand;
         this.color = color;
@@ -33,6 +39,24 @@ public class Vehicle {
         this.bodyAndChassis = bodyAndChassis;
         this.yearModel = yearModel;
         this.price = price;
+        soldUnits = 0;
+        this.availableUnits = availableUnits;
+    }
+
+    public int getAvailableUnits() {
+        return availableUnits;
+    }
+
+    public void setAvailableUnits(int availableUnits) {
+        this.availableUnits = availableUnits;
+    }
+    
+    public int getSoldUnits(){
+        return soldUnits;
+    }
+    
+    public void setSoldUnits(int soldUnits){
+        this.soldUnits = soldUnits;
     }
 
     public String getBrand() {
@@ -131,6 +155,7 @@ public class Vehicle {
                 + yearModel + ", modelName=" + modelName + ", power=" + power 
                 + ", range=" + range + ", topSpeed=" + topSpeed + ", aceleration=" 
                 + aceleration + ", numberOfDoors=" + numberOfDoors + ", bodyAndChassis=" 
-                + bodyAndChassis + ", Price: $" + price + '}';
+                + bodyAndChassis + ", Price: $" + price + ", Sold units: " + soldUnits 
+                + ", Available Units: " + availableUnits + '}';
     }
 }

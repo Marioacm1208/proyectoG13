@@ -25,6 +25,7 @@ public class Controller extends HttpServlet {
     String login = "pages/login.jsp";
     String showUnits = "pages/unitsList.jsp";
     String search = "pages/search.jsp";
+    final String SELLS_REP = "pages/sellsReports.jsp"; 
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -83,6 +84,10 @@ public class Controller extends HttpServlet {
                 
                 case "goLogin":
                     access = login;
+                    break;
+                    
+                case "reports":
+                    access = SELLS_REP;
                     break;
                 default:
                     access = home;
