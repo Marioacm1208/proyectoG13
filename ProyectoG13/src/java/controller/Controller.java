@@ -25,6 +25,7 @@ public class Controller extends HttpServlet {
     String showUnits = "pages/unitsList.jsp";
     String search = "pages/search.jsp";
     String home = "index.jsp";
+    final String REPORTS = "pages/reports.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -87,6 +88,11 @@ public class Controller extends HttpServlet {
                 case "doLogin":
                     System.out.println("NOT IMPLEMENTED!");
                     access = home;
+                break;
+                
+                case "reports":
+                    access = REPORTS;
+                break;
                 default:
                     access = home;
             }

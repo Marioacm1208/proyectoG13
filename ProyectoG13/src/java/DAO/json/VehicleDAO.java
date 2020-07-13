@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.Vehicle;
 
 /**
- *  Data Acces Object implementation for Vehicles data management
+ *  Data Access Object implementation for Vehicles data management
  * @author Mario Carranza Mena B51573
  */
 public class VehicleDAO implements IVehicle{
