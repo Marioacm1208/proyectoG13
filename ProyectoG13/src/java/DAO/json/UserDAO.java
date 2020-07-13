@@ -9,7 +9,8 @@ import model.User;
  * @author Guillermo Vega
  */
 public class UserDAO implements IUser{
-    ArrayList<User> users;
+    
+    private ArrayList<User> users;
     
     public UserDAO() {
         users = JsonUserManager.getInstance().getList();

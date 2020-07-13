@@ -14,6 +14,14 @@ public class User {
     
     public User() {
     }
+    
+    public User(String name, String lastName, String eMail, String passWord) {
+        this.name = name;
+        this.lastName = lastName;
+        this.eMail = eMail;
+        this.passWord = passWord;
+        this.ShoppingHistory = "TEST";
+    }
 
     public User(String name, String lastName, String eMail, String passWord, String ShoppingHistory) {
         this.name = name;
@@ -65,8 +73,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "name=" + name + ", lastName=" + lastName + 
+        return "User{" + "name=" + name + ", lastName=" + lastName +
                 ", eMail=" + eMail + ", passWord=" + passWord + '}';
     }
-    
 }

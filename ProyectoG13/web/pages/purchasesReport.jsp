@@ -3,7 +3,9 @@
     Created on : Jul 12, 2020, 8:38:50 PM
     Author     : Guillermo Vega
 --%>
+<%@page import="model.User"%>
 <%@page import="DAO.json.UserDAO"%>
+<%@page import="DAO.json.VehicleDAO"%>
 <%@page import="java.util.Iterator"%>
 <%@page import="java.util.ArrayList"%>
 <%@page import="model.User"%>

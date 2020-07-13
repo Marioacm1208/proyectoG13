@@ -1,10 +1,8 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
+import DAO.json.JsonUserManager;
+import DAO.json.UserDAO;
+import com.hasher.Hasher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -13,16 +11,19 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
- *
- * @author Mario
+ *  @author Mario Carranza Mena B51573
  */
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
     
     private final String PROFILE = "pages/profile.jsp";
-
+    private final String LOGIN_ERROR_PAGE = "pages/loginError.jsp";
+    private final String LOGIN_PAGE = "pages/login.jsp"; // <-- Used as a fallback
+    private UserDAO udao = new UserDAO();
+    
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -62,28 +63,30 @@ public class LoginServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String pass = request.getParameter("password");
-        String username = request.getParameter("username");
-        /**if (!(pass.isEmpty() || username.isEmpty())) {
-            System.out.println("User Data" + pass + "\n" + username);
-            String name = request.getParameter("email");
-            String password = request.getParameter("password");
-            UserModel userModel = new UserModel(getServletContext().getRealPath("/WEB-INF/userXMLDocument.xml"));
-            User user = userModel.getUser(name);  
+        String email = request.getParameter("username");
+        String passHash = Hasher.getInstance().getHash(pass);
+        System.out.println("LOGIN FORM INPUT DATA:\nEmail " + email + "\nPass Hash: " + passHash);
+        
+        String redirectAddress = LOGIN_PAGE; // <-- Redirect to Login by default as a fallback
+        JsonUserManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/users.json"));
+        
+        if (pass != null && email != null) {
+            System.out.println("LOGIN FORM INPUT DATA:\nEmail " + email + "\nPass: " + pass);
+            User user = udao.search(email);
             if (user != null) {
-                if ((DigestUtils.md5Hex(password)).equals(user.getPassword())) {
-                    request.getRequestDispatcher("index.jsp").forward(request, response);
-                    request.setAttribute("loggedUser", user); //'session' implicit object. 
+                if (passHash.equals(user.getPassWord())) {
+                    redirectAddress = PROFILE; // <-- Good Login
+                    request.setAttribute("loggedUser", user); //'Session' implicit object.
                     request.getSession().setAttribute("loggedUser", user);  
                 } else {
-                    request.getRequestDispatcher("userLoginError.jsp").forward(request, response);
+                    redirectAddress = LOGIN_ERROR_PAGE; // <-Failed Attemp to login
                 }
             }
         } else {
-            
+            redirectAddress = LOGIN_ERROR_PAGE; // <-- Data omision generate page "reload"
         }
-        **/
-        //RequestDispatcher requestDispatcher = request.getRequestDispatcher(acces);
-        //requestDispatcher.forward(request, response);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);
+        requestDispatcher.forward(request, response);
     }
 
     /**
@@ -97,7 +100,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        processRequest(request, response);
     }
 
     /**
