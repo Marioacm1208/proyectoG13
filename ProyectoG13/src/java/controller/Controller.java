@@ -87,7 +87,7 @@ public class Controller extends HttpServlet {
                     break;
                     
                 case "reports":
-                    access = SELLS_REP;
+                    redirectAddress = SELLS_REP;
                     break;
                 default:
                     redirectAddress = HOME;
