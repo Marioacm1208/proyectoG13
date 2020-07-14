@@ -6,9 +6,13 @@
 package controller;
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
 import DAO.json.JsonVehicleManager;
 >>>>>>> mario
+=======
+import DAO.json.JsonVehicleManager;
+>>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
@@ -21,10 +25,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  *
 <<<<<<< HEAD
+<<<<<<< HEAD
  * @author Mario
 =======
  * @author Mario Carranza Mena B51573
 >>>>>>> mario
+=======
+ * @author Mario Carranza Mena B51573
+>>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
  */
 @WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
 public class SearchServlet extends HttpServlet {
@@ -32,10 +40,14 @@ public class SearchServlet extends HttpServlet {
     String results = "pages/searchResults.jsp";
     String advanced = "pages/search.jsp";
 <<<<<<< HEAD
+<<<<<<< HEAD
     String home = "index.jsp";
 =======
     final String HOME = "index.jsp";
 >>>>>>> mario
+=======
+    final String HOME = "index.jsp";
+>>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -76,12 +88,15 @@ public class SearchServlet extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
 <<<<<<< HEAD
+<<<<<<< HEAD
         String action = request.getParameter("searchParams");
         String redirectTo = "";
         if (action != null) {
             System.out.println("FUE NULL? " + (action));
             switch(action) {
 =======
+=======
+>>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
         String params = request.getParameter("searchParams");
         request.setAttribute("searchParams", params);
         String redirectTo = HOME;
@@ -89,12 +104,16 @@ public class SearchServlet extends HttpServlet {
             String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
             JsonVehicleManager.getInstance().setPath(route);
             switch(params) {
+<<<<<<< HEAD
 >>>>>>> mario
+=======
+>>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
                 case "advanced":
                     redirectTo = advanced;
                     break;
                 default:
                     redirectTo = results;
+<<<<<<< HEAD
 <<<<<<< HEAD
             }
         } else {
@@ -103,13 +122,18 @@ public class SearchServlet extends HttpServlet {
             RequestDispatcher dispatcher = request.getRequestDispatcher(redirectTo);
             dispatcher.forward(request, response);
 =======
+=======
+>>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
                     //System.out.println("Redirected to " + results + " with: " + params);
                     request.getSession().setAttribute("searchParams", params);
             }
         }
         RequestDispatcher dispatcher = request.getRequestDispatcher(redirectTo);
         dispatcher.forward(request, response);
+<<<<<<< HEAD
 >>>>>>> mario
+=======
+>>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
     }
      
     /**
