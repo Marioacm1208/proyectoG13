@@ -7,34 +7,34 @@ package model;
 public class User {
 
     private String name;
-    private String lastName;
-    private String eMail;
-    private String passWord;
-    private String ShoppingHistory;
+    private String lastname;
+    private String email;
+    private String password;
     private String id;
-    private String[] ubication;
-    
+    private String[] location;
+    private String ShoppingHistory; // This variable needs to be changed to a Concrete ->
+                                    //ShoppingHistory Object (Make a new Class) that contains all purchases user made
     public User() {
     }
-    
-    public User(String name, String lastName, String eMail, String passWord, String id, String[] ubication) {
+
+    public User(String name, String lastname, String email, String password, String id, String[] location) {
         this.name = name;
-        this.lastName = lastName;
-        this.eMail = eMail;
-        this.passWord = passWord;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
         this.ShoppingHistory = "TEST";
         this.id = id;
-        this.ubication = ubication;
+        this.location = location;
     }
 
-    public User(String name, String lastName, String eMail, String passWord, String id, String[] ubication, String ShoppingHistory) {
+    public User(String name, String lastname, String email, String password, String id, String[] location, String ShoppingHistory) {
         this.name = name;
-        this.lastName = lastName;
-        this.eMail = eMail;
-        this.passWord = passWord;
+        this.lastname = lastname;
+        this.email = email;
+        this.password = password;
         this.ShoppingHistory = ShoppingHistory;
         this.id = id;
-        this.ubication = ubication;
+        this.location = location;
     }
 
     public String getId() {
@@ -45,15 +45,13 @@ public class User {
         this.id = id;
     }
 
-    public String[] getUbication() {
-        return ubication;
+    public String[] getLocation() {
+        return location;
     }
 
-    public void setUbication(String[] ubication) {
-        this.ubication = ubication;
+    public void setLocation(String[] location) {
+        this.location = location;
     }
-    
-    
 
     public String getName() {
         return name;
@@ -63,28 +61,28 @@ public class User {
         this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getLastname() {
+        return lastname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setLastname(String lastname) {
+        this.lastname = lastname;
     }
 
-    public String geteMail() {
-        return eMail;
+    public String getEmail() {
+        return email;
     }
 
-    public void seteMail(String eMail) {
-        this.eMail = eMail;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getPassWord() {
-        return passWord;
+    public String getPassword() {
+        return password;
     }
 
-    public void setPassWord(String passWord) {
-        this.passWord = passWord;
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getShoppingHistory() {
@@ -97,7 +95,7 @@ public class User {
 
     @Override
     public String toString() {
-        return "User{" + "name=" + name + ", lastName=" + lastName +
-                ", eMail=" + eMail + ", passWord=" + passWord + '}';
+        return "User{" + "name=" + name + ", lastname=" + lastname +
+                ", Email=" + email + ", password=" + password + '}';
     }
 }

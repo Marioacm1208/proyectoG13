@@ -151,7 +151,8 @@ public class JsonVehicleManager {
      * Orders the list by sells starting by the most sold vehicle.
      *
      */
-    public void ordenateBySells() {
+
+    public void orderBySells() {
         if (list.isEmpty()) {
             readJson();
         }
@@ -180,8 +181,7 @@ public class JsonVehicleManager {
         if (list.isEmpty()) {
             readJson();
         }
-
-        ordenateBySells();
+        orderBySells();
         populars.add(list.get(0));
         int mostPopular = list.get(0).getAvailableUnits();
         for (int i = 1; i < list.size(); i++) {

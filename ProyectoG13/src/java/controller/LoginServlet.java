@@ -1,6 +1,5 @@
 package controller;
 
-import DAO.json.JsonUserManager;
 import DAO.json.UserDAO;
 import com.hasher.Hasher;
 import java.io.IOException;
@@ -19,7 +18,7 @@ import model.User;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
     
-    private final String PROFILE = "pages/profile.jsp";
+    private final String HOME_PAGE = "index.jsp";
     private final String LOGIN_ERROR_PAGE = "pages/loginError.jsp";
     private final String LOGIN_PAGE = "pages/login.jsp"; // <-- Used as a fallback
     private UserDAO udao = new UserDAO();
@@ -68,22 +67,20 @@ public class LoginServlet extends HttpServlet {
         System.out.println("LOGIN FORM INPUT DATA:\nEmail " + email + "\nPass Hash: " + passHash);
         
         String redirectAddress = LOGIN_PAGE; // <-- Redirect to Login by default as a fallback
-        JsonUserManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/users.json"));
         
         if (pass != null && email != null) {
             System.out.println("LOGIN FORM INPUT DATA:\nEmail " + email + "\nPass: " + pass);
             User user = udao.search(email);
             if (user != null) {
-                if (passHash.equals(user.getPassWord())) {
-                    redirectAddress = PROFILE; // <-- Good Login
-                    request.setAttribute("loggedUser", user); //'Session' implicit object.
+                if (passHash.equals(user.getPassword())) {
+                    redirectAddress = HOME_PAGE; // <-- Good Login
                     request.getSession().setAttribute("loggedUser", user);  
                 } else {
                     redirectAddress = LOGIN_ERROR_PAGE; // <-Failed Attemp to login
                 }
             }
         } else {
-            redirectAddress = LOGIN_ERROR_PAGE; // <-- Data omision generate page "reload"
+            redirectAddress = LOGIN_ERROR_PAGE; // <-- Data omision generates page "reload"
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);
         requestDispatcher.forward(request, response);

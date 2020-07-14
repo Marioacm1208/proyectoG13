@@ -44,7 +44,11 @@
                         </div>
                         <img style="height: 200px; width: 100%; display: block;" src="img/cardImage.svg" alt="Card image">
                         <div class="card-body">
-                            <p class="card-text">Login to know vehicles prices.</p>
+                            <%if (session.getAttribute("loggedUser") != null) {%>
+                                <p class="card-text">Price $: <%=car.getPrice()%></p>
+                            <%} else{%>
+                                <p class="card-text">Login to know vehicles prices.</p>
+                            <%}%>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Color: <%=car2.getColor()%></li>

@@ -19,13 +19,13 @@
         </header>
         <div class="row h-100">
             <div class="col-md-6 col-sm-12 d-flex justify-content-start align-items-center bg-primary">
-                <div>
+                <div class="ml-3">
                     <h2 class="text-light">IE Electric Mobility<br>Signup Form</h2>
                     <p class="text-light">Already signed up?</p>                    
-                    <button type="submit" class="btn btn-secondary">Login</button>
+                    <a href="Controller?action=login" class="btn btn-secondary">Login</a>
                 </div>
             </div>
-            <div class="col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
+            <div class="bg-info col-md-6 col-sm-12 d-flex justify-content-start align-items-center">
                 <div class="w-100 p-1">
                     <form method="post" action="/ProyectoG13/signup">
                         <div class="form-group">
@@ -34,7 +34,7 @@
                         </div>
                         <div class="form-group">
                             <label>Lastname</label>
-                            <input class="form-control" type="text" name="lastName" placeholder="Lastname"/>
+                            <input class="form-control" type="text" name="lastname" placeholder="Lastname"/>
                         </div>                        
                         <div class="form-group">
                             <label>Email</label>
@@ -44,7 +44,7 @@
                             <label>Password</label>
                             <input class="form-control" type="password" name="password" placeholder="Password"/>
                         </div>
-                        <button type="submit" class="btn btn-black">Sign Up</button>
+                        <button type="submit" class="btn btn-black bg-dark">Sign Up</button>
                     </form>
                 </div>
             </div>

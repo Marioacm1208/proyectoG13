@@ -21,12 +21,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Controller", urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
-    
-    final String HOME = "index.jsp";
-    final String LOGIN = "pages/login.jsp";
-    String showUnits = "pages/unitsList.jsp";
-    String search = "pages/search.jsp";
+
+    final String HOME_PAGE = "index.jsp";
+    final String LOGIN_PAGE = "pages/login.jsp";
+    final String SHOW_UNITS = "pages/unitsList.jsp";
+    final String SEARCH_PAGE = "pages/search.jsp";
     final String SELLS_REP = "pages/sellsReports.jsp"; 
+    final String REPORTS_PAGE = "pages/reports.jsp";
+    final String PROFILE_PAGE = "pages/profile.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,31 +68,43 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String redirectAddress = HOME; // <--- redirect to HomePage by defaul as a fallback
+        String redirectAddress = HOME_PAGE; // <--- redirect to HomePage by defaul as a fallback
         if (action != null) {
+            JsonUserManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/users.json"));
+            JsonVehicleManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/vehicles.json"));
             switch(action.toLowerCase()) {
-
                 case "list":
-                    String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
-                    JsonVehicleManager.getInstance().setPath(route);
-                    redirectAddress = showUnits;
+                    redirectAddress = SHOW_UNITS;
                 break;
 
                 case "search":
-                    redirectAddress = search;
+                    redirectAddress = SEARCH_PAGE;
                 break;
 
                 case "login":
-                    //String usersFile = getServletContext().getRealPath("/WEB-INF/users.json");
-                    //JsonVehicleManager.getInstance().setPath(usersFile);
-                    redirectAddress = LOGIN;
+                    redirectAddress = LOGIN_PAGE;
+                    break;
+                    
+                case "profile":
+                    redirectAddress = PROFILE_PAGE;
+                    break;
+                case "reports":
+                    redirectAddress = REPORTS_PAGE;
+                    break;
+                case "home":
+                    redirectAddress = HOME_PAGE;
+                    break;
+                case "logout":
+                    request.getSession().invalidate();
+                    // And just to be shure session invalitation deletes all info about session variables...
+                    request.getSession().removeAttribute("loggedUser");
                     break;
                     
                 case "reports":
                     redirectAddress = SELLS_REP;
                     break;
                 default:
-                    redirectAddress = HOME;
+                    redirectAddress = HOME_PAGE;
             }
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);

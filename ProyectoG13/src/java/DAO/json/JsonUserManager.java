@@ -27,7 +27,7 @@ public class JsonUserManager {
     
     private static JsonUserManager instance;
     private ArrayList<User> list;
-    private String filePath;
+    private static String filePath;
     private BufferedReader reader;
     private BufferedWriter writer;
     
@@ -123,7 +123,7 @@ public class JsonUserManager {
             reader.close();
             
             for (User u : users) {
-                if (u.geteMail().equalsIgnoreCase(user.geteMail())) {
+                if (u.getEmail().equalsIgnoreCase(user.getEmail())) {
                     exists = true;
                     break;
                 }
@@ -149,15 +149,15 @@ public class JsonUserManager {
         
         User user = null;
         Iterator it = list.iterator();
-        while (it.hasNext()) {
+        while(it.hasNext()) {
             User current = (User)it.next();
             if (current.getName().equalsIgnoreCase(searchArg)) {
                 user = current;
                 break;
-            } else if (current.getLastName().equalsIgnoreCase(searchArg)) {
+            } else if (current.getLastname().equalsIgnoreCase(searchArg)) {
                 user = current;
                 break;
-            } else if(current.geteMail().equalsIgnoreCase(searchArg)) {
+            } else if(current.getEmail().equalsIgnoreCase(searchArg)) {
                 user = current;
                 break;
             }

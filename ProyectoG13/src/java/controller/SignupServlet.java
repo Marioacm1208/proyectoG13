@@ -76,7 +76,7 @@ public class SignupServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String name = request.getParameter("name");
-        String lastName = request.getParameter("lastName");
+        String lastName = request.getParameter("lastname");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String hashedPassword = Hasher.getInstance().getHash(password);
@@ -88,14 +88,13 @@ public class SignupServlet extends HttpServlet {
         
         User user = new User(name, lastName, email, hashedPassword, id, ubication);
         
-        String path = getServletContext().getRealPath("/WEB-INF/users.json");
-        JsonUserManager.getInstance().setPath(path);
-//        JsonUserManager.getInstance().addUser(user);
+        JsonUserManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/users.json"));
+        
         UserDAO userDAO = new UserDAO();
-        boolean success = userDAO.create(user);
-        if (success) {
-            response.sendRedirect(PROFILE_PAGE);
+        if (userDAO.create(user)) {
+            System.out.println("ENCONTRADO? " + user.toString());
             request.getSession().setAttribute("loggedUser", userDAO.search(email));
+            request.getRequestDispatcher(PROFILE_PAGE);
         } else {
             request.getRequestDispatcher(SIGNUP_PAGE).forward(request, response);
         }
