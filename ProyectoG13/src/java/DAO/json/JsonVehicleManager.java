@@ -151,13 +151,12 @@ public class JsonVehicleManager {
      * Orders the list by sells starting by the most sold vehicle.
      *
      */
-    public void orderBySells() {
+    public void sortBySells() {
+    
         if (list.isEmpty()) {
             readJson();
         }
-
-        Vehicle aux = new Vehicle();
-
+        Vehicle aux;
         for (int i = 0; i < list.size(); i++) {
             while (list.get(i + 1) != null) {
                 if (list.get(i).getAvailableUnits() < list.get(i + 1).getAvailableUnits()) {
@@ -180,8 +179,7 @@ public class JsonVehicleManager {
         if (list.isEmpty()) {
             readJson();
         }
-
-        orderBySells();
+        sortBySells();
         populars.add(list.get(0));
         int mostPopular = list.get(0).getAvailableUnits();
         for (int i = 1; i < list.size(); i++) {
@@ -196,7 +194,6 @@ public class JsonVehicleManager {
         return populars;
     }
 
-    // ---------- Ignore this section (Just testing some stuff) ---------
     /**
      * A simple Method that prints out all vehicles from current list
      */
@@ -206,10 +203,6 @@ public class JsonVehicleManager {
         });
     }
 
-    /**
-     * Do i really need to comment this man :v
-     *
-     */
     public ArrayList<Vehicle> getList() {
         if (list.isEmpty()) {
             JsonVehicleManager.getInstance().readJson();

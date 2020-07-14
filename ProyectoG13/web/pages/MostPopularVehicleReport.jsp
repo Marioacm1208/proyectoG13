@@ -26,7 +26,7 @@
         ArrayList<Vehicle> popularList = jManager.mostPopularCars();
         Iterator it = popularList.iterator();
         Vehicle car = null;
-        jManager.ordenateBySells();
+        jManager.sortBySells();
         
     %>
     <body>
