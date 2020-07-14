@@ -10,26 +10,47 @@ public class User {
     private String lastname;
     private String email;
     private String password;
+    private String id;
+    private String[] location;
     private String ShoppingHistory; // This variable needs to be changed to a Concrete ->
                                     //ShoppingHistory Object (Make a new Class) that contains all purchases user made
-    
     public User() {
     }
-    
-    public User(String name, String lastname, String email, String password) {
+
+    public User(String name, String lastname, String email, String password, String id, String[] location) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.ShoppingHistory = "TEST";
+        this.id = id;
+        this.location = location;
     }
 
-    public User(String name, String lastname, String email, String password, String ShoppingHistory) {
+    public User(String name, String lastname, String email, String password, String id, String[] location, String ShoppingHistory) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
         this.password = password;
         this.ShoppingHistory = ShoppingHistory;
+        this.id = id;
+        this.location = location;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String[] getLocation() {
+        return location;
+    }
+
+    public void setLocation(String[] location) {
+        this.location = location;
     }
 
     public String getName() {

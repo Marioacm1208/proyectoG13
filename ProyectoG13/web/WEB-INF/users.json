@@ -1,7 +1,6 @@
-[
-    {
-        "name": "Memo",
-        "lastname": "Otarola",
+[{
+        "name": "Luis",
+        "lastname": "Vega",
         "email": "luis.otarola@ucrso.info",
         "password": "9c225a950b92172f8c2afe8b682b7b86ce8f835578b546f9b8070cba309ad314",
         "ShoppingHistory": "Tesla Roadster"
@@ -11,6 +10,6 @@
         "lastname": "Carranza",
         "email": "marioacm1208@gmail.com",
         "password": "59195c6c541c8307f1da2d1e768d6f2280c984df217ad5f4c64c3542b04111a4",
-        "ShoppingHistory": "TEST"
+        "ShoppingHistory": "Audi I-Pace"
     }
 ]

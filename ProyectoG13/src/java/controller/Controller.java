@@ -21,7 +21,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Controller", urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
-    
+
     final String HOME_PAGE = "index.jsp";
     final String LOGIN_PAGE = "pages/login.jsp";
     final String SHOW_UNITS = "pages/unitsList.jsp";
@@ -98,6 +98,10 @@ public class Controller extends HttpServlet {
                     request.getSession().invalidate();
                     // And just to be shure session invalitation deletes all info about session variables...
                     request.getSession().removeAttribute("loggedUser");
+                    break;
+                    
+                case "reports":
+                    redirectAddress = SELLS_REP;
                     break;
                 default:
                     redirectAddress = HOME_PAGE;

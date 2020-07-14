@@ -24,7 +24,7 @@ public class SearchServlet extends HttpServlet {
     
     String results = "pages/searchResults.jsp";
     String advanced = "pages/search.jsp";
-    String home = "index.jsp";
+    final String HOME = "index.jsp";
     
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -66,7 +66,7 @@ public class SearchServlet extends HttpServlet {
             throws ServletException, IOException {
         String params = request.getParameter("searchParams");
         request.setAttribute("searchParams", params);
-        String redirectTo = home;
+        String redirectTo = HOME;
         if (params != null) {
             String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
             JsonVehicleManager.getInstance().setPath(route);
