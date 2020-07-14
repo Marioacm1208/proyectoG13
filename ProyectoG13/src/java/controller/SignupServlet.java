@@ -80,8 +80,13 @@ public class SignupServlet extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         String hashedPassword = Hasher.getInstance().getHash(password);
+        String[] ubication = new String[2];
+        ubication[0] = request.getParameter("province");
+        ubication[1] = request.getParameter("canton");
+        ubication[2] = request.getParameter("district");
+        String id = request.getParameter("id");
         
-        User user = new User(name, lastName, email, hashedPassword);
+        User user = new User(name, lastName, email, hashedPassword, id, ubication);
         
         String path = getServletContext().getRealPath("/WEB-INF/users.json");
         JsonUserManager.getInstance().setPath(path);
