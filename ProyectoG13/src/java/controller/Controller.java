@@ -100,7 +100,7 @@ public class Controller extends HttpServlet {
                     request.getSession().removeAttribute("loggedUser");
                     break;
                     
-                case "reports":
+                case "sellsReport":
                     redirectAddress = SELLS_REP;
                     break;
                 default:

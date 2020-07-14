@@ -1,46 +1,16 @@
-<<<<<<< HEAD
-<<<<<<< HEAD
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-import java.io.IOException;
-import java.io.PrintWriter;
-=======
-=======
->>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
-package controller;
 
 import DAO.json.UserDAO;
 import com.hasher.Hasher;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.RequestDispatcher;
-<<<<<<< HEAD
->>>>>>> mario
-=======
->>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-<<<<<<< HEAD
-<<<<<<< HEAD
-
-/**
- *
- * @author Mario
- */
-@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
-public class LoginServlet extends HttpServlet {
-
-=======
-=======
->>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
 import model.User;
 
 /**
@@ -54,10 +24,6 @@ public class LoginServlet extends HttpServlet {
     private final String LOGIN_PAGE = "pages/login.jsp"; // <-- Used as a fallback
     private UserDAO udao = new UserDAO();
     
-<<<<<<< HEAD
->>>>>>> mario
-=======
->>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -96,12 +62,6 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-<<<<<<< HEAD
-        processRequest(request, response);
-=======
-=======
->>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
         String pass = request.getParameter("password");
         String email = request.getParameter("username");
         String passHash = Hasher.getInstance().getHash(pass);
@@ -125,10 +85,6 @@ public class LoginServlet extends HttpServlet {
         }
         RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);
         requestDispatcher.forward(request, response);
-<<<<<<< HEAD
->>>>>>> mario
-=======
->>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
     }
 
     /**
@@ -142,13 +98,7 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-<<<<<<< HEAD
         processRequest(request, response);
-=======
->>>>>>> mario
-=======
->>>>>>> 6d26d3ca5606c1cd572a47312dae8fd6b3d2e6e8
     }
 
     /**
@@ -160,5 +110,4 @@ public class LoginServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
 }
