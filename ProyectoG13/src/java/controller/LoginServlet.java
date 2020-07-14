@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,11 +8,21 @@ package controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+=======
+package controller;
+
+import DAO.json.UserDAO;
+import com.hasher.Hasher;
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.RequestDispatcher;
+>>>>>>> mario
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+<<<<<<< HEAD
 
 /**
  *
@@ -20,6 +31,21 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
 public class LoginServlet extends HttpServlet {
 
+=======
+import model.User;
+
+/**
+ *  @author Mario Carranza Mena B51573
+ */
+@WebServlet(name = "LoginServlet", urlPatterns = {"/login"})
+public class LoginServlet extends HttpServlet {
+    
+    private final String HOME_PAGE = "index.jsp";
+    private final String LOGIN_ERROR_PAGE = "pages/loginError.jsp";
+    private final String LOGIN_PAGE = "pages/login.jsp"; // <-- Used as a fallback
+    private UserDAO udao = new UserDAO();
+    
+>>>>>>> mario
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -58,7 +84,33 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         processRequest(request, response);
+=======
+        String pass = request.getParameter("password");
+        String email = request.getParameter("username");
+        String passHash = Hasher.getInstance().getHash(pass);
+        System.out.println("LOGIN FORM INPUT DATA:\nEmail " + email + "\nPass Hash: " + passHash);
+        
+        String redirectAddress = LOGIN_PAGE; // <-- Redirect to Login by default as a fallback
+        
+        if (pass != null && email != null) {
+            System.out.println("LOGIN FORM INPUT DATA:\nEmail " + email + "\nPass: " + pass);
+            User user = udao.search(email);
+            if (user != null) {
+                if (passHash.equals(user.getPassword())) {
+                    redirectAddress = HOME_PAGE; // <-- Good Login
+                    request.getSession().setAttribute("loggedUser", user);  
+                } else {
+                    redirectAddress = LOGIN_ERROR_PAGE; // <-Failed Attemp to login
+                }
+            }
+        } else {
+            redirectAddress = LOGIN_ERROR_PAGE; // <-- Data omision generates page "reload"
+        }
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);
+        requestDispatcher.forward(request, response);
+>>>>>>> mario
     }
 
     /**
@@ -72,7 +124,10 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+<<<<<<< HEAD
         processRequest(request, response);
+=======
+>>>>>>> mario
     }
 
     /**

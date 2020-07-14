@@ -2,15 +2,12 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-      <group>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/web/index.jsp</file>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/web/pages/footer.jsp</file>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/src/java/DAO/json/VehicleDAO.java</file>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/web/pages/unitsList.jsp</file>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/web/pages/navbar.jsp</file>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/web/pages/search.jsp</file>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/web/pages/searchResults.jsp</file>
-            <file>file:/C:/Users/Mario/Desktop/ProyectoPrograII_G13/proyectoG13/ProyectoG13/web/styles/style.css</file>
-      </group>
+        <group>
+            <file>file:/C:/Users/Guillermo%20Vega/Desktop/proyectoG13/ProyectoG13/web/pages/profile.jsp</file>
+            <file>file:/C:/Users/Guillermo%20Vega/Desktop/proyectoG13/ProyectoG13/web/pages/login.jsp</file>
+            <file>file:/C:/Users/Guillermo%20Vega/Desktop/proyectoG13/ProyectoG13/web/pages/search.jsp</file>
+            <file>file:/C:/Users/Guillermo%20Vega/Desktop/proyectoG13/ProyectoG13/web/pages/navbar.jsp</file>
+            <file>file:/C:/Users/Guillermo%20Vega/Desktop/proyectoG13/ProyectoG13/web/pages/purchasesReport.jsp</file>
+        </group>
     </open-files>
 </project-private>

@@ -17,7 +17,7 @@
         <link href="styles/bootstrap.min.css" rel="stylesheet" type="text/css"/>
         <link href="styles/style.css" rel="stylesheet" type="text/css"/>
         <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
-        <title>JSP Page</title>
+        <title>Shop - IE Electric Mobility</title>
     </head>
     <%
         VehicleDAO dao = new VehicleDAO();
@@ -44,7 +44,11 @@
                         </div>
                         <img style="height: 200px; width: 100%; display: block;" src="img/cardImage.svg" alt="Card image">
                         <div class="card-body">
-                            <p class="card-text">Login to know vehicles prices.</p>
+                            <%if (session.getAttribute("loggedUser") != null) {%>
+                                <p class="card-text">Price $: <%=car.getPrice()%></p>
+                            <%} else{%>
+                                <p class="card-text">Login to know vehicles prices.</p>
+                            <%}%>
                         </div>
                         <ul class="list-group list-group-flush">
                             <li class="list-group-item">Color: <%=car2.getColor()%></li>
@@ -55,7 +59,7 @@
                             <li class="list-group-item">Doors: <%=car2.getNumberOfDoors()%></li>
                             <li class="list-group-item">CarBody: <%=car2.getBodyAndChassis()%></li>
                         </ul>
-                    </div>                
+                    </div>
                 <%}%>
         </div>
 
@@ -86,6 +90,6 @@
         </div>
         <script src="js/jquery-3.5.1.min.js" type="text/javascript"></script>
         <script src="js/bootstrap.min.js" type="text/javascript"></script>
+        <%@include file="footer.jsp"%>
     </body>
-    <%@include file="footer.jsp"%>
 </html>

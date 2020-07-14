@@ -11,29 +11,32 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import model.Vehicle;
+
 /**
- * This class is about to manage the read, write and update of the Vehicles Json File
+ * This class is about to manage the read, write and update of the Vehicles Json
+ * File
+ *
  * @author Mario Carranza Mena B51573
  */
 public class JsonVehicleManager {
-    
+
     private static JsonVehicleManager instance;
     private ArrayList<Vehicle> list;
     private String filePath;
     private BufferedReader reader;
     private BufferedWriter writer;
-    
+
     private JsonVehicleManager() {
         list = new ArrayList<>();
     }
-    
+
     public static JsonVehicleManager getInstance() {
         if (instance == null) {
             instance = new JsonVehicleManager();
         }
         return instance;
     }
-    
+
     /**
      * Reads and transform data from Json File to useful Vehicle objects
      */
@@ -46,7 +49,7 @@ public class JsonVehicleManager {
                 while (true) {
                     String line = reader.readLine();
                     if (line != null) {
-                        data+= line;
+                        data += line;
                     } else {
                         break;
                     }
@@ -54,7 +57,7 @@ public class JsonVehicleManager {
             } catch (IOException ex) {
                 System.err.println(ex.getMessage());
             }
-            
+
             String[] jSons = data.split("}");
             for (String jSon : jSons) { //Formating Json input data readed from file
                 if (jSon.length() > 5) {
@@ -75,9 +78,9 @@ public class JsonVehicleManager {
             System.err.println("ReadJson Method Error" + ex.getMessage());
         }
     }
-    
+
     /**
-     * Updates Vehicle Json File with the curent list including last changes
+     * Updates Vehicle Json File with the current list including last changes
      */
     public void saveVehiclesList() {
         try {
@@ -86,7 +89,6 @@ public class JsonVehicleManager {
             String data;
             data = gson.toJson(list);
             writer.write(data); // Then the whole file is updated including new changes
-             
         } catch (IOException ex) {
             System.out.println("Error Writing to Vehicle Json File" + ex.getMessage());
         } finally {
@@ -98,19 +100,24 @@ public class JsonVehicleManager {
             }
         }
     }
-    
+
     /**
      * New vehicle is added to current memory list as first step
+     *
      * @param vehicle New being added to the list
-     * @return True if vehicle is added correctly or false if vehicle is already in the list
+     * @return True if vehicle is added correctly or false if vehicle is already
+     * in the list
      */
     public boolean addVehicle(Vehicle vehicle) {
         Iterator it = list.iterator();
         boolean result = false;
         while (it.hasNext()) {
-            Vehicle current = (Vehicle)it.next();
+            Vehicle current = (Vehicle) it.next();
             if (!vehicle.getModelName().equalsIgnoreCase(current.getModelName())) {
-                result = list.add(vehicle);
+                if (!it.hasNext()) {
+                    result = list.add(vehicle);
+                    vehicle.setAvailableUnits(vehicle.getAvailableUnits() + 1);
+                }
             }
         }
         if (result) {
@@ -118,30 +125,74 @@ public class JsonVehicleManager {
         }
         return result;
     }
-    
-    public Vehicle findCar(String searchArg) {
-        
-        Vehicle vehicle = null;
-        readJson();
+
+    public ArrayList<Vehicle> findCar(String searchArg) {
+
+        ArrayList<Vehicle> results = new ArrayList<>();
+        if (list.isEmpty()) {
+            readJson();
+        }
         Iterator it = list.iterator();
+        searchArg = searchArg.toLowerCase().trim();
         while (it.hasNext()) {
-            Vehicle current = (Vehicle)it.next();
+            Vehicle current = (Vehicle) it.next();
             if (current.getBrand().equalsIgnoreCase(searchArg)) {
-                vehicle = current;
-                break;
+                results.add(current);
             } else if (current.getModelName().equalsIgnoreCase(searchArg)) {
-                vehicle = current;
-                break;
-            } else if(current.getBodyAndChassis().equalsIgnoreCase(searchArg)) {
-                vehicle = current;
-                 break;
+                results.add(current);
+            } else if (current.getBodyAndChassis().equalsIgnoreCase(searchArg)) {
+                results.add(current);
             }
         }
-        
-        return vehicle;
+        return results;
     }
 
-    // ---------- Ignore this section (Just testing some stuff) ---------
+    /**
+     * Orders the list by sells starting by the most sold vehicle.
+     *
+     */
+    public void sortBySells() {
+    
+        if (list.isEmpty()) {
+            readJson();
+        }
+        Vehicle aux;
+        for (int i = 0; i < list.size(); i++) {
+            while (list.get(i + 1) != null) {
+                if (list.get(i).getAvailableUnits() < list.get(i + 1).getAvailableUnits()) {
+                    aux = list.get(i + 1);
+                    list.set(i + 1, list.get(i));
+                    list.set(i, aux);
+                }
+            }
+        }
+    }
+
+    /**
+     * Creates a new list that only includes the most popular cars according to the amount of sells.
+     *
+     * @return the new list with only the most popular cars
+     * in the previous list.
+     */
+    public ArrayList<Vehicle> mostPopularCars() {
+        ArrayList<Vehicle> populars = new ArrayList<>();
+        if (list.isEmpty()) {
+            readJson();
+        }
+        sortBySells();
+        populars.add(list.get(0));
+        int mostPopular = list.get(0).getAvailableUnits();
+        for (int i = 1; i < list.size(); i++) {
+            while (list.get(i + 1) != null) {
+                if (list.get(i).getAvailableUnits() == mostPopular) {
+                    populars.add(list.get(i));
+                } else {
+                    break;
+                }
+            }
+        }
+        return populars;
+    }
 
     /**
      * A simple Method that prints out all vehicles from current list
@@ -151,22 +202,19 @@ public class JsonVehicleManager {
             System.out.println(vehicle.toString());
         });
     }
-    
-    /**
-     * Do i really need to comment this man :v
-     **/
+
     public ArrayList<Vehicle> getList() {
         if (list.isEmpty()) {
             JsonVehicleManager.getInstance().readJson();
         }
         return list;
     }
-    
+
     public void setPath(String path) {
         this.filePath = path;
-        //System.out.println("PATH TO JSON: " + path);
+        System.out.println("SETED PATH TO JSON: " + filePath);
     }
-    
+
     public String getPath() {
         return filePath;
     }

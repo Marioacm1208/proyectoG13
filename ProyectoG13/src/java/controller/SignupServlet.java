@@ -1,42 +1,26 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controller;
 
-<<<<<<< HEAD
-=======
-import DAO.json.JsonVehicleManager;
->>>>>>> mario
+import DAO.json.JsonUserManager;
+import DAO.json.UserDAO;
+import com.hasher.Hasher;
 import java.io.IOException;
 import java.io.PrintWriter;
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import model.User;
 
 /**
  *
-<<<<<<< HEAD
- * @author Mario
-=======
  * @author Mario Carranza Mena B51573
->>>>>>> mario
  */
-@WebServlet(name = "SearchServlet", urlPatterns = {"/search"})
-public class SearchServlet extends HttpServlet {
-    
-    String results = "pages/searchResults.jsp";
-    String advanced = "pages/search.jsp";
-<<<<<<< HEAD
-    String home = "index.jsp";
-=======
-    final String HOME = "index.jsp";
->>>>>>> mario
-    
+@WebServlet(name = "SignupServlet", urlPatterns = {"/signup"})
+public class SignupServlet extends HttpServlet {
+    private final String SIGNUP_PAGE = "pages/signup.jsp";
+    private final String PROFILE_PAGE = "pages/profile.jsp";
+
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -54,10 +38,10 @@ public class SearchServlet extends HttpServlet {
             out.println("<!DOCTYPE html>");
             out.println("<html>");
             out.println("<head>");
-            out.println("<title>Servlet SearchServlet</title>");            
+            out.println("<title>Servlet SignupServlet</title>");            
             out.println("</head>");
             out.println("<body>");
-            out.println("<h1>" + request.getParameter("userSearch") + "</h1>");
+            out.println("<h1>Servlet SignupServlet at " + request.getContextPath() + "</h1>");
             out.println("</body>");
             out.println("</html>");
         }
@@ -75,43 +59,11 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-<<<<<<< HEAD
-        String action = request.getParameter("searchParams");
-        String redirectTo = "";
-        if (action != null) {
-            System.out.println("FUE NULL? " + (action));
-            switch(action) {
-=======
-        String params = request.getParameter("searchParams");
-        request.setAttribute("searchParams", params);
-        String redirectTo = HOME;
-        if (params != null) {
-            String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
-            JsonVehicleManager.getInstance().setPath(route);
-            switch(params) {
->>>>>>> mario
-                case "advanced":
-                    redirectTo = advanced;
-                    break;
-                default:
-                    redirectTo = results;
-<<<<<<< HEAD
-            }
-        } else {
-            redirectTo = home;
-        }
-            RequestDispatcher dispatcher = request.getRequestDispatcher(redirectTo);
-            dispatcher.forward(request, response);
-=======
-                    //System.out.println("Redirected to " + results + " with: " + params);
-                    request.getSession().setAttribute("searchParams", params);
-            }
-        }
-        RequestDispatcher dispatcher = request.getRequestDispatcher(redirectTo);
-        dispatcher.forward(request, response);
->>>>>>> mario
+//        RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);
+//        requestDispatcher.forward(request, response);
+        request.getRequestDispatcher(SIGNUP_PAGE).forward(request, response);
     }
-     
+
     /**
      * Handles the HTTP <code>POST</code> method.
      *
@@ -123,8 +75,29 @@ public class SearchServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        String name = request.getParameter("name");
+        String lastName = request.getParameter("lastname");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        String hashedPassword = Hasher.getInstance().getHash(password);
+        String[] ubication = new String[2];
+        ubication[0] = request.getParameter("province");
+        ubication[1] = request.getParameter("canton");
+        ubication[2] = request.getParameter("district");
+        String id = request.getParameter("id");
         
-        processRequest(request, response);
+        User user = new User(name, lastName, email, hashedPassword, id, ubication);
+        
+        JsonUserManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/users.json"));
+        
+        UserDAO userDAO = new UserDAO();
+        if (userDAO.create(user)) {
+            System.out.println("ENCONTRADO? " + user.toString());
+            request.getSession().setAttribute("loggedUser", userDAO.search(email));
+            request.getRequestDispatcher(PROFILE_PAGE);
+        } else {
+            request.getRequestDispatcher(SIGNUP_PAGE).forward(request, response);
+        }
     }
 
     /**

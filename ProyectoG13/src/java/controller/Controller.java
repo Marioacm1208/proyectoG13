@@ -5,6 +5,7 @@
  */
 package controller;
 
+import DAO.json.JsonUserManager;
 import DAO.json.JsonVehicleManager;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -20,10 +21,14 @@ import javax.servlet.http.HttpServletResponse;
  */
 @WebServlet(name = "Controller", urlPatterns = {"/Controller"})
 public class Controller extends HttpServlet {
-    
-    String showUnits = "pages/unitsList.jsp";
-    String search = "pages/search.jsp";
-    String home = "index.jsp";
+
+    final String HOME_PAGE = "index.jsp";
+    final String LOGIN_PAGE = "pages/login.jsp";
+    final String SHOW_UNITS = "pages/unitsList.jsp";
+    final String SEARCH_PAGE = "pages/search.jsp";
+    final String SELLS_REP = "pages/sellsReports.jsp"; 
+    final String REPORTS_PAGE = "pages/reports.jsp";
+    final String PROFILE_PAGE = "pages/profile.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -63,34 +68,47 @@ public class Controller extends HttpServlet {
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         String action = request.getParameter("action");
-        String access = "";
-        if (action == null) {
-            access = search;
-            String test = request.getParameter("userSearch");
-            System.out.println(test);
-        } else {
+        String redirectAddress = HOME_PAGE; // <--- redirect to HomePage by defaul as a fallback
+        if (action != null) {
+            JsonUserManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/users.json"));
+            JsonVehicleManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/vehicles.json"));
             switch(action.toLowerCase()) {
-
                 case "list":
-                    String route = getServletContext().getRealPath("/WEB-INF/vehicles.json");
-                    //System.out.println("Archivo " + route + " existe?: " + new File(route).exists());
-                    JsonVehicleManager.getInstance().setPath(route);
-                    access = showUnits;
+                    redirectAddress = SHOW_UNITS;
                 break;
 
                 case "search":
-                    access = "search.jsp";
+                    redirectAddress = SEARCH_PAGE;
                 break;
-                
-                case "doLogin":
-                    System.out.println("NOT IMPLEMENTED!");
-                    access = home;
+
+                case "login":
+                    redirectAddress = LOGIN_PAGE;
+                    break;
+                    
+                case "profile":
+                    redirectAddress = PROFILE_PAGE;
+                    break;
+                case "reports":
+                    redirectAddress = REPORTS_PAGE;
+                    break;
+                case "home":
+                    redirectAddress = HOME_PAGE;
+                    break;
+                case "logout":
+                    request.getSession().invalidate();
+                    // And just to be shure session invalitation deletes all info about session variables...
+                    request.getSession().removeAttribute("loggedUser");
+                    break;
+                    
+                case "reports":
+                    redirectAddress = SELLS_REP;
+                    break;
                 default:
-                    access = home;
+                    redirectAddress = HOME_PAGE;
             }
         }
-        RequestDispatcher view = request.getRequestDispatcher(access);
-        view.forward(request, response);
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);
+        requestDispatcher.forward(request, response);
     }
      
     /**
