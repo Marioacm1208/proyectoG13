@@ -40,7 +40,7 @@
                             </div>
                             <img style="height: 200px; width: 100%; display: block;" src="img/cardImage.svg" alt="Card image">
                             <div class="card-body">
-                                <%if (session.getAttribute("username") != null) {%>
+                                <%if (session.getAttribute("loggedUser") != null) {%>
                                     <p class="card-text">Price $: <%=car.getPrice()%></p>
                                 <%} else{%>
                                     <p class="card-text">Login to know vehicles prices.</p>

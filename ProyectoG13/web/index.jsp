@@ -22,10 +22,19 @@
         <div class="h-100 position-relative d-flex justify-content-center align-items-center">
             <div style="z-index: 1;">
                 <h1 class="display-3">Go Electric!</h1>
-                <p class="lead" style="text-shadow: 1px 1px #000; color: #fff">Sign Up now for free and get a 15% off in your first purchase</p>
+                <%
+                    if (current != null) {
+                %>
+                <p class="lead" style="text-shadow: 1px 1px #000; color: #fff">Mobility Electrification is Happening!</p>
                 <p style="text-shadow: 1px 1px #000; color: #fff; font-size: 1.2em">Want to know more? Just hit the click button down below</p>
                 <p class="lead">
+                    <a class="btn btn-primary" href="Controller?action=search" role="button">Shop Now</a>
+                <%} else {%>
+                    <p class="lead" style="text-shadow: 1px 1px #000; color: #fff">Sign Up now for free and get a 15% off in your first purchase</p>
+                    <p style="text-shadow: 1px 1px #000; color: #fff; font-size: 1.2em">Want to know more? Just hit the click button down below</p>
+                    <p class="lead">    
                     <a class="btn btn-primary" href="/ProyectoG13/signup" role="button">SignUp</a>
+                <%}%>
                 </p>
             </div>
             <img src="img/homepageBg.jpg" class="position-absolute w-100 h-100" style="left: 0; top: 0; z-index: -1; object-fit: cover">

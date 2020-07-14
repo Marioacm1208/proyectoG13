@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package model;
 
 import com.google.gson.annotations.Expose;
@@ -10,17 +5,17 @@ import java.util.ArrayList;
 
 /**
  *
- * @author SanOVG
+ * @author Mario Carranza Mena B51573
  */
 public class Users {
-	@Expose
-	ArrayList<User> users = new ArrayList<>();
+    @Expose
+    ArrayList<User> users = new ArrayList<>();
 
-	public ArrayList<User> getEmployees() {
-		return users;
-	}
+    public ArrayList<User> getUsers() {
+        return users;
+    }
 
-	public void addEmployee(User user) {
-		this.users.add(user);
-	}
+    public void addUser(User user) {
+        this.users.add(user);
+    }
 }
