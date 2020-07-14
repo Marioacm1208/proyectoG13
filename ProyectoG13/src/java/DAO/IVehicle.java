@@ -16,10 +16,10 @@ public interface IVehicle {
     boolean delete(Vehicle vehicle);
 
     /**
-     * Looks for an existing unit with search criteria given from user serach
+     * Looks for an existing unit with a search criteria given from user search
      * @param value String being used to do the search
      * @return null or the Vehicle object depending if there's a match
      */
-    Vehicle search(String value);
+    ArrayList<Vehicle> search(String value);
     
 }

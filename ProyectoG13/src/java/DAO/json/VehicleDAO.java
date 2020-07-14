@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import model.Vehicle;
 
 /**
- *  Data Acces Object implementation for Vehicles data management
+ *  Data Access Object implementation for Vehicles data management
  * @author Mario Carranza Mena B51573
  */
 public class VehicleDAO implements IVehicle{
@@ -43,7 +43,7 @@ public class VehicleDAO implements IVehicle{
     }
 
     @Override
-    public Vehicle search(String value) {
+    public ArrayList<Vehicle> search(String value) {
         return JsonVehicleManager.getInstance().findCar(value);
     }
 }
