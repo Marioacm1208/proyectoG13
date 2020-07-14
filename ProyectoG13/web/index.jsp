@@ -33,7 +33,7 @@
                     <p class="lead" style="text-shadow: 1px 1px #000; color: #fff">Sign Up now for free and get a 15% off in your first purchase</p>
                     <p style="text-shadow: 1px 1px #000; color: #fff; font-size: 1.2em">Want to know more? Just hit the click button down below</p>
                     <p class="lead">    
-                    <a class="btn btn-primary" href="/ProyectoG13/signup" role="button">SignUp</a>
+                    <a class="btn btn-primary" href="Controller?action=signup" role="button">SignUp</a>
                 <%}%>
                 </p>
             </div>
