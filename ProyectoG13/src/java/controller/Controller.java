@@ -29,6 +29,7 @@ public class Controller extends HttpServlet {
     final String SELLS_REP = "pages/sellsReports.jsp"; 
     final String REPORTS_PAGE = "pages/reports.jsp";
     final String PROFILE_PAGE = "pages/profile.jsp";
+    final String SIGNUP_PAGE = "pages/signup.jsp";
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -72,7 +73,7 @@ public class Controller extends HttpServlet {
         if (action != null) {
             JsonUserManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/users.json"));
             JsonVehicleManager.getInstance().setPath(getServletContext().getRealPath("/WEB-INF/vehicles.json"));
-            switch(action.toLowerCase()) {
+            switch(action) {
                 case "list":
                     redirectAddress = SHOW_UNITS;
                 break;
@@ -80,7 +81,11 @@ public class Controller extends HttpServlet {
                 case "search":
                     redirectAddress = SEARCH_PAGE;
                 break;
-
+                
+                case "home":
+                    redirectAddress = HOME_PAGE;
+                    break;
+                    
                 case "login":
                     redirectAddress = LOGIN_PAGE;
                     break;
@@ -88,27 +93,26 @@ public class Controller extends HttpServlet {
                 case "profile":
                     redirectAddress = PROFILE_PAGE;
                     break;
+                case "signup":
+                    redirectAddress = SIGNUP_PAGE;
+                    break;
                 case "reports":
                     redirectAddress = REPORTS_PAGE;
-                    break;
-                case "home":
-                    redirectAddress = HOME_PAGE;
                     break;
                 case "logout":
                     request.getSession().invalidate();
                     // And just to be shure session invalitation deletes all info about session variables...
                     request.getSession().removeAttribute("loggedUser");
+                    System.out.println("CIERRE DE SESION");
                     break;
-                    
-                case "reports":
+                case "sellsReport":
                     redirectAddress = SELLS_REP;
                     break;
                 default:
                     redirectAddress = HOME_PAGE;
             }
         }
-        RequestDispatcher requestDispatcher = request.getRequestDispatcher(redirectAddress);
-        requestDispatcher.forward(request, response);
+        request.getRequestDispatcher(redirectAddress).forward(request, response);
     }
      
     /**
